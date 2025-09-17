@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Public Sans';
+    src: url('PublicSans-LightItalic.woff2') format('woff2'),
+        url('PublicSans-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
