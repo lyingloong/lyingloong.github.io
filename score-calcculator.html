@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>二课学时转综测分数计算器</title>
+  <style>
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .description {
+      background-color: #eef7ff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: inline-block;
+      width: 60px;
+      font-weight: bold;
+    }
+    input[type="number"] {
+      width: 100px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #dfefff;
+      border-radius: 8px;
+      font-size: 18px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    table, th, td {
+      border: 1px solid #aaa;
+    }
+    th, td {
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #34495e;
+      color: white;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>第二课堂学时转综合测评分数</h1>
+
+  <div class="description">
+    <p><strong>说明：</strong>本计算器根据你在“青春科大”系统中“德、智、体、美、劳”五个模块的学时数，自动计算第二课堂在综合测评中的得分。</p>
+    
+    <h3>评分标准</h3>
+    <table>
+      <tr>
+        <th>学时段</th>
+        <th>≥ 40.5</th>
+        <th>30.5–40</th>
+        <th>20.5–30</th>
+        <th>10.5–20</th>
+        <th>0.5–10</th>
+        <th>0</th>
+      </tr>
+      <tr>
+        <td><strong>对应分值</strong></td>
+        <td>1</td>
+        <td>0.8</td>
+        <td>0.6</td>
+        <td>0.4</td>
+        <td>0.2</td>
+        <td>0</td>
+      </tr>
+    </table>
+    <p><em>注：每模块独立评定，总得分为五项得分之和（满分5分）。</em></p>
+  </div>
+
+  <div class="form-group">
+    <label for="de">德：</label>
+    <input type="number" id="de" placeholder="请输入学时" step="0.5" min="0" />
+  </div>
+  <div class="form-group">
+    <label for="zhi">智：</label>
+    <input type="number" id="zhi" placeholder="请输入学时" step="0.5" min="0" />
+  </div>
+  <div class="form-group">
+    <label for="ti">体：</label>
+    <input type="number" id="ti" placeholder="请输入学时" step="0.5" min="0" />
+  </div>
+  <div class="form-group">
+    <label for="mei">美：</label>
+    <input type="number" id="mei" placeholder="请输入学时" step="0.5" min="0" />
+  </div>
+  <div class="form-group">
+    <label for="lao">劳：</label>
+    <input type="number" id="lao" placeholder="请输入学时" step="0.5" min="0" />
+  </div>
+
+  <button onclick="calculateScore()">计算得分</button>
+
+  <div class="result" id="result">
+    结果将显示在这里。
+  </div>
+
+  <footer>
+    &copy; 2025 lyingloong.github.io | 专为科大学生打造的小工具
+  </footer>
+
+  <script>
+    function getScore(hours) {
+      if (hours >= 40.5) return 1;
+      else if (hours >= 30.5) return 0.8;
+      else if (hours >= 20.5) return 0.6;
+      else if (hours >= 10.5) return 0.4;
+      else if (hours >= 0.5) return 0.2;
+      else return 0;
+    }
+
+    function calculateScore() {
+      const modules = ['de', 'zhi', 'ti', 'mei', 'lao'];
+      let total = 0;
+      let details = [];
+
+      for (let mod of modules) {
+        const input = document.getElementById(mod).value;
+        const hours = parseFloat(input) || 0;
+        const score = getScore(hours);
+        total += score;
+        details.push(`${mod === 'de' ? '德' : mod === 'zhi' ? '智' : mod === 'ti' ? '体' : mod === 'mei' ? '美' : '劳'}: ${hours}学时 → ${score}分`);
+      }
+
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = `
+        <p><strong>各模块得分：</strong></p>
+        <ul>${details.map(d => `<li>${d}</li>`).join('')}</ul>
+        <p><strong>二课总得分（满分5分）：${total.toFixed(2)} 分</strong></p>
+      `;
+    }
+  </script>
+</body>
+</html>
