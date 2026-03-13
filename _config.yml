@@ -37,6 +37,5 @@ plugins:
 collections:
   - publications
   - news
-  - showcase
-  # - projects
-  # - honors
+  - projects
+  - honors
