@@ -1,0 +1,30 @@
+{% assign item = include.item %}
+<div class="d-none d-md-block">
+    <div class="row no-gutters {% unless include.hide_bottom_border %}border-bottom{% endunless %} border-gray">
+        <div class="col-12 p-3">
+            <h5 class="mt-0 mb-1 font-weight-normal"><a href="{{ item.url | relative_url }}">{{ item.title }}</a></h5>
+            <p class="mt-0 mb-1 small text-muted">{{ item.date | date: '%Y-%m-%d' }}</p>
+            {% if item.description %}<p class="mt-0 mb-1 small text-muted">{{ item.description }}</p>{% endif %}
+            {% if item.tags and item.tags.size > 0 %}
+            <p class="small pb-0 mb-0 lh-125 text-muted">
+                {% for tag in item.tags %}<span class="mr-2">#{{ tag }}</span>{% endfor %}
+            </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row no-gutters d-md-none {% unless include.hide_bottom_border %}border-bottom{% endunless %} border-gray {% if include.first %}rounded-xl-top{% endif %} {% if include.last %}rounded-xl-bottom{% endif %}">
+    <div class="w-100 {% if include.first %}rounded-xl-top{% endif %} {% if include.last %}rounded-xl-bottom{% endif %}">
+        <div class="py-3 px-4">
+            <h5 class="mt-0 mb-1 font-weight-normal"><a href="{{ item.url | relative_url }}">{{ item.title }}</a></h5>
+            <p class="mt-0 mb-1 small text-muted">{{ item.date | date: '%Y-%m-%d' }}</p>
+            {% if item.description %}<p class="mt-0 mb-1 small text-muted">{{ item.description }}</p>{% endif %}
+            {% if item.tags and item.tags.size > 0 %}
+            <p class="small pb-0 mb-0 lh-125 text-muted">
+                {% for tag in item.tags %}<span class="mr-2">#{{ tag }}</span>{% endfor %}
+            </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
