@@ -179,6 +179,25 @@ div.lazy {
     text-align: center;
 }
 
+.blog-post-content table {
+    width: 100%;
+    margin: 1.5rem 0;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.blog-post-content th,
+.blog-post-content td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.blog-post-content th {
+    background: #f8f9fa;
+    color: #343a40;
+    font-weight: 700;
+}
+
 .blog-post-content pre {
     padding: 1rem;
     border: 1px solid #dee2e6;
