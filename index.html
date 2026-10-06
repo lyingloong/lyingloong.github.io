@@ -16,6 +16,10 @@ navbar_title: Home
     {% endif %}
 {% endif %}
 
+{% if site.data.display.homepage.show_selected_projects %}
+    {% include widgets/project_card.html %}
+{% endif %}
+
 {% if site.data.display.homepage.show_selected_publications %}
     {% assign pubs = site.publications | sort: "date" | reverse | where: "selected", true %}
     {% 

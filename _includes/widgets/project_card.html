@@ -1,0 +1,20 @@
+{% assign selected_projects = site.projects | sort: "date" | reverse | where: "show", true | where: "selected", true -%}
+{% if selected_projects.size > 0 -%}
+<div class="my-3 bg-white shadow-sm rounded-xl">
+    <h6 class="p-3 mb-0 border-bottom border-gray"><i class="fas fa-code-branch"></i> Selected Projects</h6>
+    <div class="px-3 pb-1 small">
+        {% for project in selected_projects %}
+        <div class="py-3 {% unless forloop.last %}border-bottom border-gray{% endunless %}">
+            <div class="d-flex align-items-baseline justify-content-between">
+                <h5 class="mb-1">{{ project.title }}</h5>
+                <span class="ml-3 text-muted no-break"><i>{{ project.date | date: "%b %Y" }}</i></span>
+            </div>
+            <p class="mb-2">{{ project.description }}</p>
+            <a href="{{ project.website_url }}" target="_blank" rel="noopener">Project page</a>
+            {% if project.source_url %}<span class="mx-2 text-muted">|</span><a href="{{ project.source_url }}" target="_blank" rel="noopener">Source code</a>{% endif %}
+            {% if project.steam_url %}<span class="mx-2 text-muted">|</span><a href="{{ project.steam_url }}" target="_blank" rel="noopener">Steam Workshop</a>{% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif -%}
