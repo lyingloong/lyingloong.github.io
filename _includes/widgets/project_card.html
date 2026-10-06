@@ -1,7 +1,10 @@
 {% assign selected_projects = site.projects | sort: "date" | reverse | where: "show", true | where: "selected", true -%}
 {% if selected_projects.size > 0 -%}
 <div class="my-3 bg-white shadow-sm rounded-xl">
-    <h6 class="p-3 mb-0 border-bottom border-gray"><i class="fas fa-code-branch"></i> Selected Projects</h6>
+    <h6 class="p-3 mb-0 border-bottom border-gray">
+        <i class="fas fa-code-branch"></i> Selected Projects
+        <a href="{{ 'projects' | relative_url }}">(view all <i class="fas fa-angle-double-right"></i>)</a>
+    </h6>
     <div class="px-3 pb-1 small">
         {% for project in selected_projects %}
         <div class="py-3 {% unless forloop.last %}border-bottom border-gray{% endunless %}">
@@ -16,5 +19,8 @@
         </div>
         {% endfor %}
     </div>
+    <h6 class="d-block p-3 mt-0 text-right">
+        <a href="{{ 'projects' | relative_url }}">All projects <i class="fas fa-angle-double-right"></i></a>
+    </h6>
 </div>
 {% endif -%}
