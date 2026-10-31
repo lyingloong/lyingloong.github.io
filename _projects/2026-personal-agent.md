@@ -5,7 +5,7 @@ group: Engineering
 width: 6
 date: 2026-10-31
 title: Mirally
-description: A personal agent that aims to go beyond chat — it keeps long-term context, plans multi-step tasks, and uses tools to finish them. Currently in development.
+description: A personal agent designed to go beyond chat — with long-term context, multi-step planning, and tool use. Currently in development.
 status: In progress
 ---
 
@@ -16,7 +16,7 @@ status: In progress
     </div>
     <p class="text-muted mb-3"><i>Personal agent · in development</i></p>
     <p>
-        Mirally is a personal agent designed to be more capable than a chat interface: it keeps long-term context, plans multi-step tasks, and uses tools to carry them out with as little supervision as possible.
+        Mirally is a personal agent designed to be more capable than a chat interface: it is being built around long-term context, multi-step planning, and tool use, with as little supervision as possible.
     </p>
     <p class="mb-0 text-muted">
         More details and the first release will be published here when ready.
