@@ -9,18 +9,29 @@
         {% for project in selected_projects %}
         <div class="py-3 {% unless forloop.last %}border-bottom border-gray{% endunless %}">
             <div class="d-flex align-items-baseline justify-content-between">
-                <h5 class="mb-1">{{ project.title }}</h5>
+                <h5 class="mb-1">
+                    {{ project.title }}
+                    {% if project.status %}<span class="badge badge-pill badge-light border text-muted font-weight-normal ml-2">{{ project.status }}</span>{% endif %}
+                </h5>
                 <span class="ml-3 text-muted no-break"><i>{{ project.date | date: "%b %Y" }}</i></span>
             </div>
             <p class="mb-2">{{ project.description }}</p>
+            {% assign has_project_link = false %}
+            {% if project.website_url %}
             <a href="{{ project.website_url }}" target="_blank" rel="noopener">Project page</a>
-            {% if project.source_url %}<span class="mx-2 text-muted">|</span><a href="{{ project.source_url }}" target="_blank" rel="noopener">Source code</a>{% endif %}
-            {% if project.steam_url %}<span class="mx-2 text-muted">|</span><a href="{{ project.steam_url }}" target="_blank" rel="noopener">Steam Workshop</a>{% endif %}
+            {% assign has_project_link = true %}
+            {% endif %}
+            {% if project.source_url %}
+            {% if has_project_link %}<span class="mx-2 text-muted">|</span>{% endif %}
+            <a href="{{ project.source_url }}" target="_blank" rel="noopener">Source code</a>
+            {% assign has_project_link = true %}
+            {% endif %}
+            {% if project.steam_url %}
+            {% if has_project_link %}<span class="mx-2 text-muted">|</span>{% endif %}
+            <a href="{{ project.steam_url }}" target="_blank" rel="noopener">Steam Workshop</a>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
-    <h6 class="d-block p-3 mt-0 text-right border-top border-gray">
-        <a href="{{ 'projects' | relative_url }}">All projects <i class="fas fa-angle-double-right"></i></a>
-    </h6>
 </div>
 {% endif -%}

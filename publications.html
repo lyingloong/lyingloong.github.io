@@ -2,9 +2,10 @@
 layout: default
 title : Publications
 navbar_title: Publications
-body_attr: >-
-  data-spy="scroll" data-target="#navbar-year" data-offset="100"
+description: "Publications and papers by Hao Wang."
 ---
+
+<h1 class="pt-4">{{ page.title }}</h1>
 
 {% assign pubs_by_year = site.publications | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
 

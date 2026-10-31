@@ -1,11 +1,11 @@
 primary_name: "Hao Wang"
-secondary_name: ""
+secondary_name: "王昊"
 navbar_name: "Hao Wang @ USTC"
 
 positions:
-- name: Computer Science
-- name: University of Science and Technology of China
+- name: B.Eng. in Computer Science, University of Science and Technology of China
   logo: /assets/images/badges/USTC_blue.png
+- name: Incoming M.S. Student, MIRA Lab
 
 
 email: "lyingloong@mail.ustc.edu.cn"
@@ -22,11 +22,10 @@ github: lyingloong
 short_bio_text_justify: false
 short_bio: >-
   <p>
-    I am an undergraduate student in Computer Science at the University of Science and Technology of China (USTC).
+    I am a final-year undergraduate student in Computer Science at the University of Science and Technology of China (USTC), and I will join <a href="https://miralab.ai/">MIRA Lab</a> as a graduate student in 2027.
   </p>
   <p>
-    My research interests lie at the intersection of <b>Machine Learning (ML)</b> and <b>Large Language Model (LLM) agents</b>, with a focus on building intelligent systems that can reason, plan, and interact autonomously.
-    Feel free to connect with me for discussions, collaborations, or any inquiries!
+    My research focuses on <b>LLM post-training</b>, especially <b>agentic reinforcement learning</b> — training language agents to plan, use tools, and recover from failures. I am also interested in reliable evaluation of agent behavior, and in building agents that are genuinely useful outside a demo.
   </p>
 
 portrait_url: /assets/images/photos/portrait.jpg
@@ -37,27 +36,31 @@ education:
 - name: University of Science and Technology of China
   logo: /assets/images/badges/USTC_blue.png
   position: >- 
-    Computer Science<br/>
+    B.Eng. in Computer Science<br/>
     Undergraduate Student
-  date: Sep. 2023 - present
+  date: Sep. 2023 – Present
 
 experience:
 - name: Lab for Intelligent Networking and Knowledge Engineering
   logo: /assets/images/badges/USTC_blue.png
   position: Research Intern
-  date: Sep. 2024 - Jan. 2026
+  date: Sep. 2024 – Jan. 2026
 - name: SpikeCV Research Group, Peking University
   logo: /assets/images/badges/spikecv.png
   position: Research Intern (Remote)
-  date: Mar. 2026 - July. 2026
-- name: Hefei Lingxin(灵心) Technology Co., Ltd.
+  date: Mar. 2026 – Jul. 2026
+- name: Hefei Lingxin (灵心) Technology Co., Ltd.
   logo: /assets/images/badges/lingxin_logo.png
   position: Model Testing Engineer (Intern)
-  date: Mar. 2026 - Apr. 2026
-- name: Cambricon(寒武纪) Technologies Co., Ltd.
+  date: Mar. 2026 – Apr. 2026
+- name: Cambricon (寒武纪) Technologies Co., Ltd.
   logo: /assets/images/badges/cambricon.png
   position: High-Performance Computing Library Development Intern
-  date: Apr. 2026 - Sep. 2026
+  date: Apr. 2026 – Sep. 2026
+- name: New Oriental Education & Technology Group (新东方)
+  icon: "fas fa-chalkboard-teacher"
+  position: Part-time Instructor, AP & A-Level Mathematics
+  date: Oct. 2026 – Present
 
 # awards:
 # - name: Award Name 2

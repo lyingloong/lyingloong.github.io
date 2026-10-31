@@ -13,14 +13,23 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
+title: "Hao Wang"
+description: >-
+  Hao Wang is a B.Eng. student in Computer Science at USTC, working on LLM
+  post-training and agentic reinforcement learning. Incoming graduate student at
+  MIRA Lab.
+url: "https://lyingloong.github.io"
 baseurl: "" # the subpath of your site, e.g. /blog
+author: "Hao Wang"
+lang: en
 
 # Build settings
 markdown: kramdown
 kramdown:
   input: GFM
 plugins:
-  - jekyll-email-protect
+  - jekyll-feed
+  - jekyll-sitemap
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

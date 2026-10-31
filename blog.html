@@ -3,9 +3,10 @@ layout: default
 title: Blog
 navbar_title: Blog
 permalink: /blog/
-body_attr: >-
-  data-spy="scroll" data-target="#navbar-year" data-offset="100"
+description: "Notes on LLM agents, agentic reinforcement learning, and engineering."
 ---
+
+<h1 class="pt-4">{{ page.title }}</h1>
 
 {% assign posts_by_year = site.posts | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
 

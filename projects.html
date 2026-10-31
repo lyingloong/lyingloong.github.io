@@ -3,12 +3,16 @@ layout: default
 title : Projects
 navbar_title: Projects
 container_class: container-xl
+grid: true
+description: "Engineering projects by Hao Wang."
 ---
+
+<h1 class="pt-4">{{ page.title }}</h1>
 
 {% assign cards_by_group = site.projects | sort: "date" | reverse | where: "show", true | group_by_exp: "item", "item.group" %}
 
 {% for group in cards_by_group %}
-<h1>{{ group.name }}</h1>
+<h2>{{ group.name }}</h2>
 <div class="row grid mb-4">
     <div class="grid-sizer col-1"></div>
     {% for item in group.items %}

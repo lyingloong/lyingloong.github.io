@@ -2,9 +2,10 @@
 layout: default
 title : Honors
 navbar_title: Honors
-body_attr: >-
-  data-spy="scroll" data-target="#navbar-year" data-offset="100"
+description: "Honors and awards of Hao Wang."
 ---
+
+<h1 class="pt-4">{{ page.title }}</h1>
 
 {% assign honors_by_year = site.honors | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
 
