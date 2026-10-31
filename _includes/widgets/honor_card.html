@@ -5,10 +5,7 @@
         <a href="{{ 'honors' | relative_url }}">(view all <i class="fas fa-angle-double-right"></i>)</a>
     </h6>
     {% for item in honors limit:include.limit %}
-        {% include widgets/honor_item.html item=item first=false last=false %}    
+        {% include widgets/honor_item.html item=item hide_bottom_border=forloop.last first=forloop.first last=forloop.last %}
     {% endfor %}
-    <h6 class="d-block p-3 mt-0 text-right">
-        <a href="{{ 'honors' | relative_url }}">All honors <i class="fas fa-angle-double-right"></i></a>
-    </h6>
 </div>
 
