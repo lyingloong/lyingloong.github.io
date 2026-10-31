@@ -43,7 +43,8 @@ a:hover,
 p a,
 .media-body a,
 .text-profile-bio a,
-.blog-post-content a {
+.blog-post-content a,
+h2 a {
     text-decoration: underline;
     text-underline-offset: 2px;
 }
