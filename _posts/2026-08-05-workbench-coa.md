@@ -8,7 +8,7 @@ tags: [agents, tool-use, reflection, workbench]
 This post documents an implementation and observation study in WorkBench, informed by OPPO PersonalAI Lab's [Chain-of-Agents (CoA)](https://github.com/OPPO-PersonalAI/Agent_Foundation_Models). CoA uses a single model to simulate multi-role collaboration; here, it is simplified into a controlled loop of `plan`, `tool`, and `reflection` stages.
 
 <figure>
-  <img src="{{ '/assets/images/blog/workbench-pipeline.png' | relative_url }}" alt="WorkBench sandbox, tool execution, and outcome-centric evaluation pipeline">
+  <img src="{{ '/assets/images/blog/workbench-pipeline.webp' | relative_url }}" alt="WorkBench sandbox, tool execution, and outcome-centric evaluation pipeline" width="1360" height="430">
   <figcaption><em>WorkBench's sandbox execution and outcome-centric evaluation flow. Image from the <a href="https://github.com/olly-styles/WorkBench">WorkBench</a> project (MindsDB, MIT License).</em></figcaption>
 </figure>
 

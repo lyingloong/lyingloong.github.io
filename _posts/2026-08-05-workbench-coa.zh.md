@@ -9,7 +9,7 @@ published: false
 本文记录在 WorkBench 上参考 OPPO PersonalAI Lab [Chain-of-Agents（CoA）](https://github.com/OPPO-PersonalAI/Agent_Foundation_Models) 的一次实现与观察。CoA 以单个模型模拟多角色协作；本文将其简化为由 `plan`、`tool` 和 `reflection` 组成的受控循环。
 
 <figure>
-  <img src="{{ '/assets/images/blog/workbench-pipeline.png' | relative_url }}" alt="WorkBench sandbox, tool execution, and outcome-centric evaluation pipeline">
+  <img src="{{ '/assets/images/blog/workbench-pipeline.webp' | relative_url }}" alt="WorkBench sandbox, tool execution, and outcome-centric evaluation pipeline" width="1360" height="430">
   <figcaption><em>WorkBench 的沙箱执行与结果导向评测流程。图片来自 <a href="https://github.com/olly-styles/WorkBench">WorkBench</a> 项目（MindsDB，MIT License）。</em></figcaption>
 </figure>
 
