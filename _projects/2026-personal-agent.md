@@ -11,8 +11,8 @@ status: In progress
 
 <div class="p-4">
     <div class="d-flex align-items-baseline justify-content-between">
-        <h2 class="mb-1">Mirally</h2>
-        <span class="badge badge-pill badge-light border text-muted font-weight-normal">In progress</span>
+        <h3 class="mb-1">Mirally</h3>
+        <span class="badge badge-pill badge-light border text-dark font-weight-normal">In progress</span>
     </div>
     <p class="text-muted mb-3"><i>Personal agent · in development</i></p>
     <p>

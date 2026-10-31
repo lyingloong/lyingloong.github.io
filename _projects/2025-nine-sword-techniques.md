@@ -12,7 +12,7 @@ steam_url: https://steamcommunity.com/sharedfiles/filedetails/?id=3554467601
 ---
 
 <div class="p-4">
-    <h2>Nine Sword Techniques</h2>
+    <h3>Nine Sword Techniques</h3>
     <p class="text-muted mb-3"><i>Slay the Spire</i> mod</p>
     <p>
         A fan-made mod that adds nine sword techniques, the Muzixi character, new cards, events, and related game mechanics to <i>Slay the Spire</i>.

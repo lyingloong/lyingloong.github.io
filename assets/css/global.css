@@ -30,6 +30,22 @@ body {
     padding-top: 5.0rem;
 }
 
+a,
+.nav-link {
+    color: #0056b3;
+}
+
+a:hover,
+.nav-link:hover {
+    color: #003f88;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #ffffff;
+    background-color: #0056b3;
+}
+
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: 700;
