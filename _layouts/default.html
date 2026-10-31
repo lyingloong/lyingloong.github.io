@@ -70,10 +70,10 @@
     <!-- Stylesheets -->
     <link rel="preload" href="{{ '/assets/fonts/lato-400.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ '/assets/fonts/lato-700.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="{{ '/assets/vendor/bootstrap/css/bootstrap.min.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/vendor/fontawesome/css/all.min.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/lib/bootstrap/css/bootstrap.min.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/lib/fontawesome/css/all.min.css' | relative_url }}">
     {% if page.layout == 'post' %}
-    <link rel="stylesheet" href="{{ '/assets/vendor/katex/katex.min.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/lib/katex/katex.min.css' | relative_url }}">
     {% endif %}
     <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}">
 </head>
@@ -85,16 +85,16 @@
     {% include footer.html %}
 
     <!-- Scripts -->
-    <script defer src="{{ '/assets/vendor/jquery/jquery.min.js' | relative_url }}"></script>
-    <script defer src="{{ '/assets/vendor/jquery.lazy/jquery.lazy.min.js' | relative_url }}"></script>
-    <script defer src="{{ '/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/lib/jquery/jquery.min.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/lib/jquery.lazy/jquery.lazy.min.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/lib/bootstrap/js/bootstrap.bundle.min.js' | relative_url }}"></script>
     {% if page.grid %}
-    <script defer src="{{ '/assets/vendor/masonry/masonry.pkgd.min.js' | relative_url }}"></script>
-    <script defer src="{{ '/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/lib/masonry/masonry.pkgd.min.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/lib/imagesloaded/imagesloaded.pkgd.min.js' | relative_url }}"></script>
     {% endif %}
     {% if page.layout == 'post' %}
-    <script defer src="{{ '/assets/vendor/katex/katex.min.js' | relative_url }}"></script>
-    <script defer src="{{ '/assets/vendor/katex/contrib/auto-render.min.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/lib/katex/katex.min.js' | relative_url }}"></script>
+    <script defer src="{{ '/assets/lib/katex/contrib/auto-render.min.js' | relative_url }}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             renderMathInElement(document.body, {
