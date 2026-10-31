@@ -40,6 +40,14 @@ a:hover,
     color: #003f88;
 }
 
+p a,
+.media-body a,
+.text-profile-bio a,
+.blog-post-content a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
     color: #ffffff;
