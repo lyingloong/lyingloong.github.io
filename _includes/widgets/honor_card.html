@@ -1,11 +1,11 @@
-{% assign honors = include.honors %}
-<div class="my-3 p-0 bg-white shadow-sm rounded-xl">
-    <h2 class="h6 border-bottom border-gray p-3 mb-0">
-        {% if include.title %}{{ include.title }}{% else %}<i class="fas fa-star"></i> Selected Recent Honors{% endif %} 
-        <a href="{{ 'honors' | relative_url }}" aria-label="View all honors">(view all <i class="fas fa-angle-double-right"></i>)</a>
-    </h2>
-    {% for item in honors limit:include.limit %}
-        {% include widgets/honor_item.html item=item hide_bottom_border=forloop.last first=forloop.first last=forloop.last %}
-    {% endfor %}
-</div>
-
+<section class="home-section" aria-labelledby="honors-heading">
+    <div class="section-heading">
+        <h2 id="honors-heading">{{ include.title | default: 'Selected Honors' }}</h2>
+        <a href="{{ '/honors' | relative_url }}">All honors <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    <div class="honor-list">
+        {% for item in include.honors limit:include.limit %}
+            {% include widgets/honor_item.html item=item %}
+        {% endfor %}
+    </div>
+</section>

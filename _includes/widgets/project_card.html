@@ -1,37 +1,28 @@
-{% assign selected_projects = site.projects | sort: "date" | reverse | where: "show", true | where: "selected", true -%}
-{% if selected_projects.size > 0 -%}
-<div class="my-3 bg-white shadow-sm rounded-xl">
-    <h2 class="h6 p-3 mb-0 border-bottom border-gray">
-        <i class="fas fa-code-branch"></i> Selected Projects
-        <a href="{{ 'projects' | relative_url }}" aria-label="View all projects">(view all <i class="fas fa-angle-double-right"></i>)</a>
-    </h2>
-    <div class="px-3 pb-1 small">
+{% assign selected_projects = site.projects | sort: 'date' | reverse | where: 'show', true | where: 'selected', true %}
+{% if selected_projects.size > 0 %}
+<section class="home-section" aria-labelledby="projects-heading">
+    <div class="section-heading">
+        <h2 id="projects-heading">Selected Projects</h2>
+        <a href="{{ '/projects' | relative_url }}">All projects <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    <div class="project-list">
         {% for project in selected_projects %}
-        <div class="py-3 {% unless forloop.last %}border-bottom border-gray{% endunless %}">
-            <div class="d-flex align-items-baseline justify-content-between">
-                <h3 class="h5 mb-1">
-                    {{ project.title }}
-                    {% if project.status %}<span class="badge badge-pill badge-light border text-dark font-weight-normal ml-2">{{ project.status }}</span>{% endif %}
-                </h3>
-                <span class="ml-3 text-muted no-break"><i>{{ project.date | date: "%b %Y" }}</i></span>
+        <article class="project-entry">
+            <div class="entry-heading">
+                <h3 class="entry-title">{{ project.title }}</h3>
+                {% if project.status %}<span class="entry-status">{{ project.status }}</span>{% endif %}
+                <time class="entry-date" datetime="{{ project.date | date: '%Y-%m-%d' }}">{{ project.date | date: '%Y' }}</time>
             </div>
-            <p class="mb-2">{{ project.description }}</p>
-            {% assign has_project_link = false %}
-            {% if project.website_url %}
-            <a href="{{ project.website_url }}" target="_blank" rel="noopener">Project page</a>
-            {% assign has_project_link = true %}
+            <p class="entry-description">{{ project.description }}</p>
+            {% if project.website_url or project.source_url or project.steam_url %}
+            <div class="entry-links">
+                {% if project.website_url %}<a href="{{ project.website_url }}" target="_blank" rel="noopener">Project page</a>{% endif %}
+                {% if project.source_url %}<a href="{{ project.source_url }}" target="_blank" rel="noopener">Code</a>{% endif %}
+                {% if project.steam_url %}<a href="{{ project.steam_url }}" target="_blank" rel="noopener">Steam Workshop</a>{% endif %}
+            </div>
             {% endif %}
-            {% if project.source_url %}
-            {% if has_project_link %}<span class="mx-2 text-muted">|</span>{% endif %}
-            <a href="{{ project.source_url }}" target="_blank" rel="noopener">Source code</a>
-            {% assign has_project_link = true %}
-            {% endif %}
-            {% if project.steam_url %}
-            {% if has_project_link %}<span class="mx-2 text-muted">|</span>{% endif %}
-            <a href="{{ project.steam_url }}" target="_blank" rel="noopener">Steam Workshop</a>
-            {% endif %}
-        </div>
+        </article>
         {% endfor %}
     </div>
-</div>
-{% endif -%}
+</section>
+{% endif %}

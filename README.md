@@ -9,6 +9,15 @@ This repo is built from the foundation of [academic-homepage](https://github.com
 bundle exec jekyll serve
 ```
 
+## Design
+
+The site uses a compact academic layout with a white background, blue links,
+and plain publication and experience lists. Shared styles live in
+`assets/css/global.css`; the existing Jekyll data and collections still supply
+the content. Edit `_data/profile.yml` for personal information and
+`_data/display.yml` for homepage sections and the number of recent news items.
+Older news remains available under “Earlier news” on the homepage.
+
 ## Blog
 
 The blog index is available at `/blog/`. Add a new Markdown file under `_posts`

@@ -10,7 +10,7 @@
     <link rel="preload" href="{{ '/assets/fonts/lato-400.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="{{ '/assets/fonts/lato-700.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ '/assets/lib/bootstrap/css/bootstrap.min.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 </head>
 <style type="text/css">
     .container {

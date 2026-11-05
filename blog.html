@@ -6,31 +6,22 @@ permalink: /blog/
 description: "Notes on LLM agents, agentic reinforcement learning, and engineering."
 ---
 
-<h1 class="pt-4">{{ page.title }}</h1>
+<header class="page-header">
+    <h1>{{ page.title }}</h1>
+</header>
 
 {% assign posts_by_year = site.posts | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
-
 {% if posts_by_year.size > 0 %}
-<div class="row">
-    <div class="col-12 col-lg-10">
-        {% for year in posts_by_year %}
-        <h2 class="pt-4" id="year-{{ year.name }}">{{ year.name }}</h2>
-        <div class="my-0 p-0 bg-white shadow-sm rounded-xl">
-            {% for post in year.items %}
-                {% include widgets/blog_item.html item=post hide_bottom_border=forloop.last first=forloop.first last=forloop.last %}
-            {% endfor %}
-        </div>
+{% for year in posts_by_year %}
+<section class="year-section" aria-labelledby="year-{{ year.name }}">
+    <h2 id="year-{{ year.name }}">{{ year.name }}</h2>
+    <div class="writing-list">
+        {% for post in year.items %}
+        {% include widgets/blog_item.html item=post %}
         {% endfor %}
     </div>
-
-    <div class="col-2 d-none d-lg-block">
-        <div id="navbar-year" class="nav nav-pills flex-column sticky-top" style="top: 80px">
-            {% for year in posts_by_year %}
-            <a class="nav-link d-block" href="#year-{{ year.name }}">{{ year.name }}</a>
-            {% endfor %}
-        </div>
-    </div>
-</div>
+</section>
+{% endfor %}
 {% else %}
-<p class="pt-4 text-muted">Posts will appear here after the first Markdown file is added to <code>_posts</code>.</p>
+<p>No posts yet.</p>
 {% endif %}

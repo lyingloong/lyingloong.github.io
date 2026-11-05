@@ -36,7 +36,7 @@
     <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32.png' | relative_url }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
-    <meta name="theme-color" content="#f8f9fa">
+    <meta name="theme-color" content="#ffffff">
 
     <script type="application/ld+json">
     {
@@ -76,13 +76,15 @@
     {% if page.layout == 'post' %}
     <link rel="stylesheet" href="{{ '/assets/lib/katex/katex.min.css' | relative_url }}">
     {% endif %}
-    <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/global.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 </head>
-<body class="bg-light" {{ page.body_attr }}>
+<body {{ page.body_attr }}>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     {% include navbar.html %}
-    <div class="{% if page.container_class %}{{ page.container_class }}{% else %}container-lg{% endif %}">
+    <main id="main-content" class="site-container" tabindex="-1">
         {{content}}
-    </div>
+    </main>
+    {% include footer.html %}
 
     <!-- Scripts -->
     <script defer src="{{ '/assets/lib/jquery/jquery.min.js' | relative_url }}"></script>
@@ -108,6 +110,5 @@
     </script>
     {% endif %}
     <script defer src="{{ '/assets/js/common.js' | relative_url }}"></script>
-    <script defer src="{{ '/assets/js/bubble_visual_hash.js' | relative_url }}"></script>
 </body>
 </html>
