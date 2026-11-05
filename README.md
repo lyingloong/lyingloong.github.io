@@ -17,6 +17,7 @@ and plain publication and experience lists. Shared styles live in
 the content. Edit `_data/profile.yml` for personal information and
 `_data/display.yml` for homepage sections and the number of recent news items.
 Older news remains available under “Earlier news” on the homepage.
+The site intentionally has no footer.
 
 ## Blog
 

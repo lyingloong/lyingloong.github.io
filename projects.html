@@ -21,20 +21,20 @@ description: "Engineering projects by Hao Wang."
                 <time class="entry-date" datetime="{{ item.date | date: '%Y-%m-%d' }}">{{ item.date | date: '%b %Y' }}</time>
             </div>
             {% if item.status %}<p class="project-status">{{ item.status }}</p>{% endif %}
-            <p class="entry-description">{{ item.description }}</p>
+            {% assign project_content = item.content | strip %}
+            <div class="project-description">
+                {% if project_content != '' %}
+                {{ item.content }}
+                {% else %}
+                <p>{{ item.description }}</p>
+                {% endif %}
+            </div>
             {% if item.website_url or item.source_url or item.steam_url %}
             <p class="entry-links">
                 {% if item.website_url %}<a href="{{ item.website_url }}" target="_blank" rel="noopener">Project page</a>{% endif %}
                 {% if item.source_url %}<a href="{{ item.source_url }}" target="_blank" rel="noopener">Source code</a>{% endif %}
                 {% if item.steam_url %}<a href="{{ item.steam_url }}" target="_blank" rel="noopener">Steam Workshop</a>{% endif %}
             </p>
-            {% endif %}
-            {% assign project_content = item.content | strip %}
-            {% if project_content != '' %}
-            <details class="project-details">
-                <summary>Detailed description</summary>
-                {{ item.content }}
-            </details>
             {% endif %}
         </article>
         {% endfor %}
