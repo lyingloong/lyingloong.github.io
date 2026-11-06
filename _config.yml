@@ -23,6 +23,16 @@ baseurl: "" # the subpath of your site, e.g. /blog
 author: "Hao Wang"
 lang: en
 
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      navbar_title: Blog
+      lang: en
+      toc: true
+
 # Build settings
 markdown: kramdown
 kramdown:
@@ -32,6 +42,10 @@ plugins:
   - jekyll-sitemap
 
 # Exclude from processing.
+exclude:
+  - docs
+  - _templates
+
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
 # exclude:

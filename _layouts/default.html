@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'en' }}">
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
 <!-- Template: https://github.com/luost26/academic-homepage -->
 <head>
     <meta charset="utf-8">
@@ -109,5 +109,8 @@
     </script>
     {% endif %}
     <script defer src="{{ '/assets/js/common.js' | relative_url }}"></script>
+    {% if page.layout == 'post' %}
+    <script defer src="{{ '/assets/js/post.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+    {% endif %}
 </body>
 </html>

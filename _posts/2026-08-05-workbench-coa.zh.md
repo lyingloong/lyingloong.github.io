@@ -1,5 +1,6 @@
 ---
 layout: post
+lang: zh-CN
 title: "DR-CoA: Maybe Replanning Is a Good Choice"
 description: "在 WorkBench 上复现 CoA 时，一个关于副作用、反思与重新规划的实验记录。"
 tags: [agents, tool-use, reflection, workbench]

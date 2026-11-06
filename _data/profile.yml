@@ -4,7 +4,7 @@ navbar_name: "Hao Wang @ USTC"
 
 positions:
 - name: B.Eng. in Computer Science, University of Science and Technology of China
-  logo: /assets/images/badges/USTC_blue.png
+  logo: /assets/images/badges/normalized/USTC_blue.png
 - name: Incoming M.S. Student, MIRA Lab
 
 
@@ -34,7 +34,7 @@ portrait_caption: >-
 
 education:
 - name: University of Science and Technology of China
-  logo: /assets/images/badges/USTC_blue.png
+  logo: /assets/images/badges/normalized/USTC_blue.png
   position: >- 
     B.Eng. in Computer Science<br/>
     Undergraduate Student
@@ -42,23 +42,23 @@ education:
 
 experience:
 - name: Lab for Intelligent Networking and Knowledge Engineering
-  logo: /assets/images/badges/USTC_blue.png
+  logo: /assets/images/badges/normalized/USTC_blue.png
   position: Research Intern
   date: Sep. 2024 – Jan. 2026
 - name: SpikeCV Research Group, Peking University
-  logo: /assets/images/badges/spikecv.png
+  logo: /assets/images/badges/normalized/spikecv.png
   position: Research Intern (Remote)
   date: Mar. 2026 – Jul. 2026
 - name: Hefei Lingxin (灵心) Technology Co., Ltd.
-  logo: /assets/images/badges/lingxin_logo.png
+  logo: /assets/images/badges/normalized/lingxin_logo.png
   position: Model Testing Engineer (Intern)
   date: Mar. 2026 – Apr. 2026
 - name: Cambricon (寒武纪) Technologies Co., Ltd.
-  logo: /assets/images/badges/cambricon.png
+  logo: /assets/images/badges/normalized/cambricon.png
   position: High-Performance Computing Library Development Intern
   date: Apr. 2026 – Sep. 2026
 - name: New Oriental Education & Technology Group (新东方)
-  logo: /assets/images/badges/new-oriental.png
+  logo: /assets/images/badges/normalized/new-oriental.png
   position: Part-time Instructor, AP & A-Level Mathematics
   date: Oct. 2026 – Present
 
