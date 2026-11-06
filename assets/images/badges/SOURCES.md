@@ -23,9 +23,15 @@ Processing on 2026-11-06:
 3. Crop the derivative canvas to the complete visible mark. Derivative images
    deliberately have different dimensions and aspect ratios.
 
-The experience component supplies the consistent visual boundary: a 52 × 52
-CSS-pixel square with a quiet background and border. Inside it, each complete
-mark fits within 36 × 28 pixels without distortion. Circular marks occupy about
-28 × 28 pixels; horizontal wordmarks use up to 36 pixels of width. The frame,
-centering, and surrounding whitespace provide consistency across those shapes.
-Do not stretch a wordmark into a square or crop its letters to match an emblem.
+The experience component aligns each logo with the first line of the bold
+organization name. An unadorned 44 × 22 CSS-pixel layout slot keeps text columns
+aligned; it has no background or border. Logos retain their original proportions:
+
+- Default emblems and vertical marks fit within 22 × 22 pixels.
+- `logo_variant: wordmark` fits horizontal lettering within 44 × 18 pixels.
+- `logo_variant: symbol` fits dense geometric marks within 30 × 20 pixels.
+
+Set the optional variant on the education or experience item in
+`_data/profile.yml`. Keep logos aligned to the title's first line on mobile as
+well, rather than centering them across the entire title and role. Do not stretch
+a wordmark into a square or crop its letters to match an emblem.

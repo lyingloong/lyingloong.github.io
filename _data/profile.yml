@@ -51,14 +51,17 @@ experience:
   date: Mar. 2026 – Jul. 2026
 - name: Hefei Lingxin (灵心) Technology Co., Ltd.
   logo: /assets/images/badges/normalized/lingxin_logo.png
+  logo_variant: symbol
   position: Model Testing Engineer (Intern)
   date: Mar. 2026 – Apr. 2026
 - name: Cambricon (寒武纪) Technologies Co., Ltd.
   logo: /assets/images/badges/normalized/cambricon.png
+  logo_variant: wordmark
   position: High-Performance Computing Library Development Intern
   date: Apr. 2026 – Sep. 2026
 - name: New Oriental Education & Technology Group (新东方)
   logo: /assets/images/badges/normalized/new-oriental.png
+  logo_variant: wordmark
   position: Part-time Instructor, AP & A-Level Mathematics
   date: Oct. 2026 – Present
 

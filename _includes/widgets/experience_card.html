@@ -10,8 +10,8 @@
             <div class="experience-date">{{ item.date }}</div>
             <div class="experience-organization">
                 {% if item.logo %}
-                <span class="experience-logo-frame" aria-hidden="true">
-                    <img class="experience-logo" src="{{ item.logo | relative_url }}?v={{ site.time | date: '%s' }}" alt="" width="36" height="28" loading="lazy">
+                <span class="experience-logo-slot" aria-hidden="true">
+                    <img class="experience-logo{% if item.logo_variant %} experience-logo--{{ item.logo_variant }}{% endif %}" src="{{ item.logo | relative_url }}?v={{ site.time | date: '%s' }}" alt="" width="22" height="22" loading="lazy">
                 </span>
                 {% endif %}
                 <div>
@@ -32,8 +32,8 @@
             <div class="experience-date">{{ item.date }}</div>
             <div class="experience-organization">
                 {% if item.logo %}
-                <span class="experience-logo-frame" aria-hidden="true">
-                    <img class="experience-logo" src="{{ item.logo | relative_url }}?v={{ site.time | date: '%s' }}" alt="" width="36" height="28" loading="lazy">
+                <span class="experience-logo-slot" aria-hidden="true">
+                    <img class="experience-logo{% if item.logo_variant %} experience-logo--{{ item.logo_variant }}{% endif %}" src="{{ item.logo | relative_url }}?v={{ site.time | date: '%s' }}" alt="" width="22" height="22" loading="lazy">
                 </span>
                 {% endif %}
                 <div>

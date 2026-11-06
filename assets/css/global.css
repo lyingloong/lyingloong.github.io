@@ -120,13 +120,16 @@ main:focus { outline: none; }
 
 .subsection-heading { margin: 20px 0 14px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; }
 .experience-list { padding: 0; margin: 0; list-style: none; }
-.experience-list li { display: grid; grid-template-columns: 166px minmax(0, 1fr); gap: 18px; margin-bottom: 20px; }
+.experience-list li { display: grid; grid-template-columns: 166px minmax(0, 1fr); gap: 18px; margin-bottom: 18px; }
 .experience-date { padding-top: 2px; color: var(--muted); font-size: 12px; }
-.experience-organization { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.experience-organization { display: flex; align-items: flex-start; gap: 10px; min-width: 0; }
 .experience-organization > div { min-width: 0; }
-.experience-logo-frame { display: flex; flex: 0 0 52px; align-items: center; justify-content: center; width: 52px; height: 52px; border: 1px solid #e7ebee; background: #f8f9fa; }
-.experience-logo { display: block; width: 36px; height: 28px; object-fit: contain; }
-.experience-list h4 { margin: 0 0 3px; font-size: 14px; line-height: 1.5; }
+/* Keep marks aligned with the first title line, even when the name wraps. */
+.experience-logo-slot { display: flex; flex: 0 0 44px; align-items: center; justify-content: center; width: 44px; height: 22px; }
+.experience-logo { display: block; width: 22px; height: 22px; object-fit: contain; }
+.experience-logo--wordmark { width: 44px; height: 18px; }
+.experience-logo--symbol { width: 30px; height: 20px; }
+.experience-list h4 { margin: 0 0 3px; font-size: 14px; line-height: 22px; }
 .experience-list p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
 
 .project-entry { padding: 18px 0; border-bottom: 1px solid var(--rule); }
