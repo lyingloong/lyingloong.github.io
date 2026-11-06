@@ -8,28 +8,24 @@
 - Format and dimensions: PNG, 240 × 94 pixels, RGBA.
 - Downloaded on 2026-11-06. The original image is preserved without cropping, recoloring, or resizing.
 
-## Optically balanced derivatives
+## Display assets
 
 The files under `normalized/` are derived from the matching original files in
-this directory. All originals are retained. Each derivative uses a transparent
-192 × 128 pixel canvas, intended to display at 48 × 32 CSS pixels (4× assets).
+this directory. All originals are retained. The USTC, SpikeCV, Lingxin, and
+Cambricon originals were already present in this repository; this change does
+not establish new external source claims for them.
 
 Processing on 2026-11-06:
 
 1. Remove transparent outer padding and connected near-white outer background
-   (RGB channels >= 245), while preserving enclosed white details.
-2. Crop to the full visible mark, without cutting lettering or changing colors.
-3. Resize proportionally with Lanczos filtering and center on the common canvas.
-4. Adjust the occupied area for each mark's proportions and visual density.
+   (RGB channels >= 245), preserving enclosed white details and all lettering.
+2. Resize proportionally with Lanczos filtering, retaining the original colors.
+3. Crop the derivative canvas to the complete visible mark. Derivative images
+   deliberately have different dimensions and aspect ratios.
 
-| File in `normalized/` | Original crop (left, top, right, bottom) | Visible output size | Visible size at 48 × 32 CSS pixels |
-| --- | --- | --- | --- |
-| `USTC_blue.png` | 0, 0, 96, 96 | 112 × 112 | 28 × 28 |
-| `spikecv.png` | 10, 0, 117, 127 | 94 × 112 | 23.5 × 28 |
-| `lingxin_logo.png` | 6, 33, 121, 93 | 152 × 79 | 38 × 19.75 |
-| `cambricon.png` | 0, 42, 128, 86 | 192 × 66 | 48 × 16.5 |
-| `new-oriental.png` | 5, 3, 232, 93 | 168 × 67 | 42 × 16.75 |
-
-The USTC, SpikeCV, Lingxin, and Cambricon originals were already present in this
-repository; this change does not establish new external source claims for them.
-The New Oriental original is sourced from its official website as recorded above.
+The experience component supplies the consistent visual boundary: a 52 × 52
+CSS-pixel square with a quiet background and border. Inside it, each complete
+mark fits within 36 × 28 pixels without distortion. Circular marks occupy about
+28 × 28 pixels; horizontal wordmarks use up to 36 pixels of width. The frame,
+centering, and surrounding whitespace provide consistency across those shapes.
+Do not stretch a wordmark into a square or crop its letters to match an emblem.
