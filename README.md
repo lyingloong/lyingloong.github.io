@@ -19,6 +19,12 @@ the content. Edit `_data/profile.yml` for personal information and
 Older news remains available under “Earlier news” on the homepage.
 The site intentionally has no footer.
 
+## Projects
+
+Project frontmatter uses `date` only for sorting. Add an optional `display_date`
+string, such as `display_date: "2025–present"`, to show a date or range on both
+the homepage and Projects page. Omit it or leave it empty to hide the date.
+
 ## Blog
 
 The blog index is available at `/blog/`. Copy `_templates/post.md` to `_posts`

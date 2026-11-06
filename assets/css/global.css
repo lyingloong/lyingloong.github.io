@@ -80,7 +80,6 @@ main:focus { outline: none; }
 .text-profile-bio a, .blog-post-content a { text-decoration: underline; }
 .profile-portrait { margin: 5px 0 0; }
 .profile-portrait img { display: block; width: 144px; height: 180px; object-fit: cover; }
-.profile-portrait figcaption { margin-top: 8px; color: var(--muted); font-size: 10px; line-height: 1.4; }
 .profile-links { display: flex; flex-wrap: wrap; gap: 6px 0; padding: 0; margin: 20px 0 0; list-style: none; font-size: 14px; }
 .profile-links li + li::before { content: "/"; padding: 0 12px; color: #a7adb3; }
 
@@ -171,7 +170,6 @@ main:focus { outline: none; }
     .profile-positions { grid-column: 1; margin-bottom: 0; font-size: 12px; }
     .profile-portrait { grid-column: 2; grid-row: 1 / span 2; margin: 0; }
     .profile-portrait img { width: 88px; height: 110px; }
-    .profile-portrait figcaption { font-size: 9px; }
     .text-profile-bio { grid-column: 1 / -1; margin-top: 8px; font-size: 15px; }
     .profile-links { grid-column: 1 / -1; margin-top: 0; }
     .section-heading h2 { font-size: 20px; }

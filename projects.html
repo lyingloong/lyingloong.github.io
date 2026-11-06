@@ -18,7 +18,8 @@ description: "Engineering projects by Hao Wang."
         <article class="project-entry">
             <div class="entry-heading">
                 <h3 class="entry-title">{{ item.title }}</h3>
-                <time class="entry-date" datetime="{{ item.date | date: '%Y-%m-%d' }}">{{ item.date | date: '%b %Y' }}</time>
+                {% assign display_date = item.display_date | default: '' | strip %}
+                {% if display_date != '' %}<span class="entry-date">{{ display_date | escape }}</span>{% endif %}
             </div>
             {% if item.status %}<p class="project-status">{{ item.status }}</p>{% endif %}
             {% assign project_content = item.content | strip %}

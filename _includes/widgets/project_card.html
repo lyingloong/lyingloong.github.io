@@ -11,7 +11,8 @@
             <div class="entry-heading">
                 <h3 class="entry-title">{{ project.title }}</h3>
                 {% if project.status %}<span class="entry-status">{{ project.status }}</span>{% endif %}
-                <time class="entry-date" datetime="{{ project.date | date: '%Y-%m-%d' }}">{{ project.date | date: '%Y' }}</time>
+                {% assign display_date = project.display_date | default: '' | strip %}
+                {% if display_date != '' %}<span class="entry-date">{{ display_date | escape }}</span>{% endif %}
             </div>
             <p class="entry-description">{{ project.description }}</p>
             {% if project.website_url or project.source_url or project.steam_url %}

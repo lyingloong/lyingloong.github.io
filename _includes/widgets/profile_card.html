@@ -45,7 +45,6 @@
     {% if site.data.profile.portrait_url %}
     <figure class="profile-portrait">
         <img src="{{ site.data.profile.portrait_url | relative_url }}" width="144" height="180" alt="Illustrated portrait of {{ site.data.profile.primary_name }}"{% if site.data.profile.portrait_caption %} title="{{ site.data.profile.portrait_caption | escape }}"{% endif %}>
-        {% if site.data.profile.portrait_caption %}<figcaption>{{ site.data.profile.portrait_caption }}</figcaption>{% endif %}
     </figure>
     {% endif %}
 </section>
