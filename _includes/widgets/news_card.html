@@ -1,5 +1,5 @@
 {% assign sorted_news = site.news | sort: 'date' | reverse %}
-{% assign news_limit = include.limit | default: 4 %}
+{% assign news_limit = include.limit | default: 10 %}
 <section class="home-section" aria-labelledby="news-heading">
     <div class="section-heading">
         <h2 id="news-heading">News</h2>
