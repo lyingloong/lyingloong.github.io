@@ -22,13 +22,8 @@ description: "Engineering projects by Hao Wang."
                 {% if display_date != '' %}<span class="entry-date">{{ display_date | escape }}</span>{% endif %}
             </div>
             {% if item.status %}<p class="project-status">{{ item.status }}</p>{% endif %}
-            {% assign project_content = item.content | strip %}
             <div class="project-description">
-                {% if project_content != '' %}
-                {{ item.content }}
-                {% else %}
                 <p>{{ item.description }}</p>
-                {% endif %}
             </div>
             {% if item.website_url or item.source_url or item.steam_url %}
             <p class="entry-links">

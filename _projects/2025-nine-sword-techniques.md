@@ -10,5 +10,3 @@ website_url: https://lyingloong.github.io/nine-sword-techniques-sts-mod/
 source_url: https://github.com/lyingloong/nine-sword-techniques-sts-mod
 steam_url: https://steamcommunity.com/sharedfiles/filedetails/?id=3554467601
 ---
-
-A fan-made mod that adds nine sword techniques, the Muzixi character, new cards, events, and related game mechanics to *Slay the Spire*.

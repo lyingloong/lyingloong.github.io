@@ -9,5 +9,3 @@ description: A DeepSeek Harness plugin for persistent, concurrent workflows — 
 website_url: https://lyingloong.github.io/dsh-auto-workflow/
 source_url: https://github.com/lyingloong/dsh-auto-workflow
 ---
-
-The `dsh-auto-workflow` plugin runs persistent, concurrent node-graph workflows inside DeepSeek Harness. Agents, shell commands, HTTP calls, and Human decisions share one durable graph; new packets can arrive at any time, and the bundled PR-native development flow is just one replaceable example.
