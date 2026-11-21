@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 180" role="img" aria-labelledby="title desc">
+  <title id="title">需求生命周期</title>
+  <desc id="desc">一个需求在独立分支和 worktree 中开发，发布为 draft PR，经过审查与共享 brief 后标记 ready；外部合并或 Human 批准后由工作流 self-merge，随后验证并清理。</desc>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; fill: #252b31; }
+    .box { fill: #fff; stroke: #cfd7dd; stroke-width: 1.2; }
+    .box-accent { fill: #f6f9fc; stroke: #225c8a; stroke-width: 1.4; }
+    .label { font-size: 12px; font-weight: 600; }
+    .sub { font-size: 9.5px; fill: #626b73; }
+    .tiny { font-size: 8.5px; fill: #626b73; letter-spacing: .6px; }
+    .arrow { fill: none; stroke: #97a1ad; stroke-width: 1.2; marker-end: url(#arrow); }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#97a1ad"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="180" fill="#fff"/>
+  <text x="20" y="36" class="tiny">一个需求，一个分支，一个 PR</text>
+
+  <rect x="20" y="56" width="110" height="88" rx="7" class="box"/>
+  <text x="32" y="82" class="label">需求</text>
+  <text x="32" y="101" class="sub">稳定 ID</text>
+  <text x="32" y="116" class="sub">风险 · 优先级</text>
+
+  <path d="M130 100H145" class="arrow"/>
+  <rect x="145" y="56" width="110" height="88" rx="7" class="box-accent"/>
+  <text x="157" y="82" class="label">分支</text>
+  <text x="157" y="101" class="sub">auto/req-*</text>
+  <text x="157" y="116" class="sub">worktree</text>
+
+  <path d="M255 100H270" class="arrow"/>
+  <rect x="270" y="56" width="110" height="88" rx="7" class="box"/>
+  <text x="282" y="82" class="label">Draft PR</text>
+  <text x="282" y="101" class="sub">push + 开 PR</text>
+  <text x="282" y="116" class="sub">单 commit</text>
+
+  <path d="M380 100H395" class="arrow"/>
+  <rect x="395" y="56" width="110" height="88" rx="7" class="box"/>
+  <text x="407" y="82" class="label">审查</text>
+  <text x="407" y="101" class="sub">精确 commit</text>
+  <text x="407" y="116" class="sub">共享 brief</text>
+
+  <path d="M505 100H520" class="arrow"/>
+  <rect x="520" y="56" width="110" height="88" rx="7" class="box-accent"/>
+  <text x="532" y="82" class="label">Ready PR</text>
+  <text x="532" y="101" class="sub">可外部合并</text>
+  <text x="532" y="116" class="sub">宽限期</text>
+
+  <path d="M630 100H645" class="arrow"/>
+  <rect x="645" y="56" width="110" height="88" rx="7" class="box-accent"/>
+  <text x="657" y="82" class="label">合并</text>
+  <text x="657" y="101" class="sub">外部</text>
+  <text x="657" y="116" class="sub">Human 后自合并</text>
+
+  <path d="M755 100H770" class="arrow"/>
+  <rect x="770" y="56" width="110" height="88" rx="7" class="box"/>
+  <text x="782" y="82" class="label">验证</text>
+  <text x="782" y="101" class="sub">fetch base</text>
+  <text x="782" y="116" class="sub">清理</text>
+</svg>
