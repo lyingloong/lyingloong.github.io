@@ -2,6 +2,13 @@
 layout: default
 ---
 
+{% if page.translation_key %}
+  {% assign translations = site.posts | where: "translation_key", page.translation_key %}
+  {% assign target_lang = 'en' %}
+  {% if page.lang == 'en' %}{% assign target_lang = 'zh-CN' %}{% endif %}
+  {% assign translation = translations | where: "lang", target_lang | first %}
+{% endif %}
+
 <article class="blog-post">
     <a class="blog-back-link" href="{{ '/blog/' | relative_url }}"><span aria-hidden="true">&larr;</span> Back to Blog</a>
     <header class="blog-post-header">
@@ -9,6 +16,11 @@ layout: default
             <p class="blog-post-date"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
             {% if page.updated %}
             <p class="blog-post-updated">Updated <time datetime="{{ page.updated | date_to_xmlschema }}">{{ page.updated | date: "%B %-d, %Y" }}</time></p>
+            {% endif %}
+            {% if translation %}
+            <a class="post-lang-switch" href="{{ translation.url | relative_url }}" hreflang="{{ translation.lang }}" lang="{{ translation.lang }}" aria-label="Read this article in {% if translation.lang == 'zh-CN' %}Chinese{% else %}English{% endif %}">
+                {% if translation.lang == 'zh-CN' %}中文{% else %}English{% endif %}
+            </a>
             {% endif %}
         </div>
         <h1>{{ page.title }}</h1>

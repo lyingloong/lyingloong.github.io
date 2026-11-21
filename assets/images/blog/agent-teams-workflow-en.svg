@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-label="AgentTeams automated development workflow">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <marker id="arrow-dashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="520" fill="#f8fafc"/>
+  <text x="40" y="44" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#0f172a">AgentTeams Automated Development Workflow</text>
+
+  <!-- Row 1 -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="92" width="190" height="82" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="270" y="92" width="190" height="82" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="500" y="92" width="190" height="82" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="730" y="92" width="190" height="82" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="960" y="92" width="190" height="82" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  </g>
+
+  <text x="135" y="124" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f172a">Requirements</text>
+  <text x="135" y="150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">executable spec</text>
+
+  <text x="365" y="124" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f172a">Engineer</text>
+  <text x="365" y="150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">isolated worktree</text>
+
+  <text x="595" y="124" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f172a">Pull Request</text>
+  <text x="595" y="150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">GitHub collaboration</text>
+
+  <text x="825" y="124" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f172a">Verifier</text>
+  <text x="825" y="150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">commit-pinned CI</text>
+
+  <text x="1055" y="124" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#0f172a">Reviewer</text>
+  <text x="1055" y="150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">code · design · scope</text>
+
+  <!-- Row arrows -->
+  <line x1="230" y1="133" x2="262" y2="133" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="460" y1="133" x2="492" y2="133" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="690" y1="133" x2="722" y2="133" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="920" y1="133" x2="952" y2="133" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Review to pool -->
+  <path d="M 1055 174 L 1055 220 L 760 220 L 760 270" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Merge pool -->
+  <g filter="url(#shadow)">
+    <rect x="500" y="270" width="320" height="82" rx="12" fill="#eef6ff" stroke="#93c5fd"/>
+  </g>
+  <text x="660" y="300" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#1e3a5f">Merge Queue</text>
+  <text x="660" y="324" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">risk order · conflict check · no auto-merge</text>
+
+  <!-- Merge gate -->
+  <path d="M 660 352 L 660 398" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <g filter="url(#shadow)">
+    <rect x="500" y="398" width="320" height="82" rx="12" fill="#f0fdf4" stroke="#86efac"/>
+  </g>
+  <text x="660" y="430" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#14532d">Codex / Human</text>
+  <text x="660" y="454" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">final gate · human approval</text>
+
+  <!-- Captain -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="270" width="260" height="82" rx="12" fill="#fff7ed" stroke="#fdba74"/>
+  </g>
+  <text x="170" y="300" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#7c2d12">Captain / Control</text>
+  <text x="170" y="324" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">dispatch · follow-up · reconcile</text>
+
+  <!-- Captain dashed arrows -->
+  <path d="M 300 311 L 492 311" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrow-dashed)"/>
+  <path d="M 300 352 L 492 436" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrow-dashed)"/>
+</svg>

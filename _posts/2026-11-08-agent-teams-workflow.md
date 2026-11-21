@@ -4,6 +4,7 @@ lang: zh-CN
 title: "基于 dsh-agent-teams 的自动开发流：实现、运行结果与问题"
 description: "记录基于 dsh-agent-teams 的自动开发流实现与运行结果：角色划分、任务契约、PR 流程，以及约 40 个 PR 后暴露的状态与调度问题。"
 tags: [dsh, agent, workflow]
+translation_key: agent-teams-workflow
 summary: >-
   本文记录基于 dsh-agent-teams 的自动开发流：五类角色、任务契约与 PR 阶段边界；
   流程累计完成约 40 个 PR、一百多个 commit，暴露出状态漂移和调度依赖人工等问题，
