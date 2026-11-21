@@ -17,7 +17,14 @@ description: "Notes on LLM agents, agentic reinforcement learning, and engineeri
     <h2 id="year-{{ year.name }}">{{ year.name }}</h2>
     <div class="writing-list">
         {% for post in year.items %}
-        {% include widgets/blog_item.html item=post %}
+        {% assign hide_post = false %}
+        {% if post.lang != 'en' and post.translation_key %}
+            {% assign en_post = site.posts | where: "translation_key", post.translation_key | where: "lang", "en" | first %}
+            {% if en_post %}{% assign hide_post = true %}{% endif %}
+        {% endif %}
+        {% unless hide_post %}
+            {% include widgets/blog_item.html item=post %}
+        {% endunless %}
         {% endfor %}
     </div>
 </section>

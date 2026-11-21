@@ -1,9 +1,7 @@
 {% assign item = include.item %}
-{% assign lang_label = 'EN' %}
-{% if item.lang == 'zh-CN' %}{% assign lang_label = '中文' %}{% endif %}
 <article class="writing-entry" lang="{{ item.lang | default: 'en' }}">
     <time class="entry-date" datetime="{{ item.date | date: '%Y-%m-%d' }}">{{ item.date | date: '%b %d, %Y' }}</time>
-    <h3 class="entry-title"><a href="{{ item.url | relative_url }}">{{ item.title }}</a> <span class="entry-lang" aria-label="Language: {{ lang_label }}">{{ lang_label }}</span></h3>
+    <h3 class="entry-title"><a href="{{ item.url | relative_url }}">{{ item.title }}</a>{% if item.lang == 'zh-CN' %} <span class="entry-lang" aria-label="Language: Chinese">中文</span>{% endif %}</h3>
     {% if item.description %}<p class="entry-description">{{ item.description }}</p>{% endif %}
     {% if item.tags.size > 0 %}
     <p class="blog-post-tags">{% for tag in item.tags %}<span class="blog-post-tag">{{ tag }}</span>{% endfor %}</p>
