@@ -5,11 +5,24 @@ navbar_name: "Hao Wang @ USTC"
 positions:
 - name: B.Eng. in Computer Science, University of Science and Technology of China
   logo: /assets/images/badges/normalized/USTC_blue.png
-- name: Incoming M.S. Student, MIRA Lab
+
+graduate_study:
+  lab: MIRA Lab
+  lab_zh: MIRA 实验室
+  url: https://miralab.ai/
+  start_year: 2027
+
+research:
+  focus: LLM post-training
+  focus_zh: 大模型后训练
+  specialty: agentic reinforcement learning
+  specialty_zh: 智能体强化学习
+  evaluation: reliable evaluation of agent behavior
+  evaluation_zh: 智能体行为的可靠评测
 
 
 email: "lyingloong@mail.ustc.edu.cn"
-cv_link: /assets/cv/CV_wanghao.pdf
+cv_link: /assets/cv/CV_wanghao_professional.pdf
 gscholar: znJKF8oAAAAJ
 github: lyingloong
 # twitter: your_twitter_id  # Do not include the '@' symbol
@@ -20,13 +33,6 @@ github: lyingloong
 # orcid: 0000-0000-0000-0000
 
 short_bio_text_justify: false
-short_bio: >-
-  <p>
-    I am a final-year undergraduate student in Computer Science at the University of Science and Technology of China (USTC), and I will join <a href="https://miralab.ai/">MIRA Lab</a> as a graduate student in 2027.
-  </p>
-  <p>
-    My research focuses on <b>LLM post-training</b>, especially <b>agentic reinforcement learning</b> — training language agents to plan, use tools, and recover from failures. I am also interested in reliable evaluation of agent behavior, and in building agents that are genuinely useful outside a demo.
-  </p>
 
 portrait_url: /assets/images/photos/portrait.jpg
 portrait_caption: >-
@@ -39,31 +45,67 @@ education:
     B.Eng. in Computer Science<br/>
     Undergraduate Student
   date: Sep. 2023 – Present
+  cv:
+    degree: 计算机科学与技术（本科）
+    institution: 中国科学技术大学
+    city: 合肥
+    gpa: "3.57/4.30"
+    rank: Top 35%
 
 experience:
 - name: Lab for Intelligent Networking and Knowledge Engineering
   logo: /assets/images/badges/normalized/USTC_blue.png
   position: Research Intern
   date: Sep. 2024 – Jan. 2026
+  cv:
+    title: LINKE 实验室 - 科研实习
+    location: 中国科学技术大学高新校区
+    highlights:
+    - 参与课题组日常科研工作与组会研讨，负责相关实验设计、数据处理与结果验证
+    - 以共同作者身份完成论文 ReLiB-100k
 - name: SpikeCV Research Group, Peking University
   logo: /assets/images/badges/normalized/spikecv.png
   position: Research Intern (Remote)
   date: Mar. 2026 – Jul. 2026
+  cv:
+    title: SpikeCV Research Group, Peking University - Research Intern
+    location: Remote Research
+    highlights:
+    - 参与脉冲智驾相关科研调研、算法实验与方案验证
 - name: Hefei Lingxin (灵心) Technology Co., Ltd.
   logo: /assets/images/badges/normalized/lingxin_logo.png
   logo_variant: symbol
   position: Model Testing Engineer (Intern)
   date: Mar. 2026 – Apr. 2026
+  cv:
+    title: 合肥灵心科技有限公司 - 模型测试工程师（实习）
+    location: 中国声谷
+    highlights:
+    - 负责公司Qwen3.5 微调大模型测试评测，聚焦陪伴机器人场景，完成情绪识别、情感回应能力验证与效果评估
+    - 搭建智能体记忆模块测评框架，实现记忆准确性、连贯性、长期记忆能力的自动化评测
+    - 构建实时评测流程，输出模型测评报告，支撑模型微调与智能体功能迭代优化
 - name: Cambricon (寒武纪) Technologies Co., Ltd.
   logo: /assets/images/badges/normalized/cambricon.png
   logo_variant: wordmark
   position: High-Performance Computing Library Development Intern
   date: Apr. 2026 – Sep. 2026
+  cv:
+    title: 寒武纪科技 - 高性能计算库开发实习生
+    location: 合肥
+    highlights:
+    - 参与寒武纪MLU算子开发工作
+    - 协助开发寒武纪计算库专用CodeAgent
 - name: New Oriental Education & Technology Group (新东方)
   logo: /assets/images/badges/normalized/new-oriental.png
   logo_variant: wordmark
   position: Part-time Instructor, AP & A-Level Mathematics
   date: Oct. 2026 – Present
+  cv:
+    section: teaching
+    show: false
+    title: 新东方教育科技集团 - 兼职教师
+    highlights:
+    - 教授 AP 与 A-Level 数学
 
 # awards:
 # - name: Award Name 2

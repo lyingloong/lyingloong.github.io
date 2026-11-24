@@ -1,0 +1,17 @@
+<% experience_sections.each do |heading, roles| -%>
+<% next if roles.empty? -%>
+\begin{resumeSection}[6]{<%= tex(heading) %>}
+<% roles.each do |entry| -%>
+  \begin{resumeEntry}
+    {<%= tex(entry.fetch("title")) %>}
+    {<%= tex(cv_date(entry.fetch("date", ""), variant)) %>}
+    {<%= tex(entry.fetch("location", "")) %>}
+<% entry.fetch("highlights").each do |highlight| -%>
+    \item <%= tex(highlight) %>
+<% end -%>
+  \end{resumeEntry}
+
+<% end -%>
+\end{resumeSection}
+
+<% end -%>

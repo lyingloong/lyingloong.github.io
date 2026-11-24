@@ -9,6 +9,41 @@ This repo is built from the foundation of [academic-homepage](https://github.com
 bundle exec jekyll serve
 ```
 
+## CV
+
+The CVs share `cv/resume.cls`. The Professional layout uses `cv/main.tex.erb`
+and the Education layout uses `cv/education.tex.erb`.
+
+| Text to change | Source |
+| --- | --- |
+| Contact details, education, research interests, internships, and New Oriental | `_data/profile.yml` |
+| Education CV photo, additional email addresses, graduate title, Gaokao results, teaching assistant experience, and tutoring | `cv/education.yml` |
+| Professional CV skills and projects listed only in the CV | `cv/professional.tex.erb` |
+| Publications, homepage projects, and honors | `_publications/`, `_projects/`, and `_honors/` |
+| Awards listed only in the CV, award translations, and open-source contributions | `_data/cv.yml` |
+
+Use the `cv` block on a shared education or experience entry for Chinese labels
+and contribution details. Set `section: teaching` within that block to route a
+role to the Education CV. Set `show: false` within that block to omit the role
+from the CVs.
+
+Building requires Ruby 3, XeLaTeX, latexmk, TikZ, and the TeX Live Chinese
+language and recommended font packages. On Debian or Ubuntu, install them with
+`sudo apt install ruby latexmk texlive-xetex texlive-pictures texlive-lang-chinese texlive-fonts-recommended`.
+
+Run this command from the repository root.
+
+```sh
+./cv/build.sh
+```
+
+Use `./cv/build.sh professional` or `./cv/build.sh education` to build a single
+version. Both PDFs go in `assets/cv/` as `CV_wanghao_professional.pdf` and
+`CV_wanghao_education.pdf`. The homepage links to the Professional CV.
+
+Jekyll excludes the `cv/` source directory from the published site. Commit
+the rebuilt PDFs with their source updates to publish them through GitHub Pages.
+
 ## Design
 
 The site uses a compact academic layout with a white background, blue links,

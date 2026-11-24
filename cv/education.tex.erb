@@ -1,0 +1,143 @@
+\documentclass{resume}
+\usepackage[fontset=fandol]{ctex}
+\usepackage{graphicx}
+\usepackage{tikz}
+\linespread{1.16}
+
+\newlength{\educationMargin}
+\setlength{\educationMargin}{14mm}
+\geometry{a4paper,left=\educationMargin,right=\educationMargin,top=0mm,bottom=16mm}
+\definecolor{resumeAccent}{HTML}{234359}
+\definecolor{educationInk}{HTML}{26343A}
+\definecolor{educationMuted}{HTML}{556871}
+\definecolor{educationHeaderText}{HTML}{E4EDF3}
+\definecolor{educationCard}{HTML}{EBF1F4}
+\definecolor{educationRule}{HTML}{C8D6DF}
+\usepackage[colorlinks,allcolors=resumeAccent]{hyperref}
+
+\newcommand{\educationSection}[1]{%
+  \par\addvspace{9mm}%
+  {\rmfamily\songti\Large\bfseries\color{resumeAccent}#1\par}%
+  \nobreak\vspace{1mm}%
+  {\color{resumeAccent}\hrule height 0.6pt}%
+  \nobreak\vspace{5mm}%
+}
+
+\begin{document}
+\sffamily\color{educationInk}
+\setlength{\parfillskip}{0pt plus 1fil}
+\begingroup
+\setlength{\fboxsep}{0pt}
+\hypersetup{urlcolor=educationHeaderText}
+\noindent\makebox[0pt][l]{\hspace*{-\educationMargin}%
+  \colorbox{resumeAccent}{%
+    \begin{minipage}[c][61mm][c]{\paperwidth}
+      \noindent\hspace*{\educationMargin}%
+      \begin{minipage}[c]{0.64\paperwidth}
+        \raggedright\color{educationHeaderText}
+        {\kaishu\color{white}\fontsize{34}{39}\selectfont
+          <%= tex(profile.fetch("secondary_name", profile.fetch("primary_name"))) %>\par}
+        \medskip
+        {\large 中国科学技术大学 · 合肥\par}
+        \medskip
+        {\small 邮箱\par}
+<% education_emails.each do |email| -%>
+        <%= link(email, "mailto:#{email}") %>\par
+<% end -%>
+      \end{minipage}\hfill
+      \begin{tikzpicture}[baseline=(portrait.center)]
+        \node[rounded corners=4pt, fill=white, draw=educationRule, inner sep=2.5pt] (portrait)
+          {\includegraphics[width=34mm]{\detokenize{<%= education_photo %>}}};
+      \end{tikzpicture}%
+      \hspace*{\educationMargin}%
+    \end{minipage}%
+  }%
+}\par
+\endgroup
+
+\educationSection{教育背景}
+\noindent\begin{tikzpicture}
+  \node[anchor=north west, inner sep=0pt] at (0,0) {%
+    \begin{minipage}[t]{0.49\linewidth}
+      \raggedright
+      \setlength{\parskip}{7pt}
+<% profile.fetch("education").each do |entry| -%>
+<% details = entry.fetch("cv", {}) -%>
+      {\large\bfseries <%= tex(details.fetch("institution") { entry.fetch("name") }) %>\par}
+      <%= tex(details.fetch("degree") { text(entry.fetch("position")) }) %>\par
+      {\color{educationMuted}<%= tex(cv_date(entry.fetch("date"), variant)) %>\par}
+<% if details["gpa"] -%>
+      {\bfseries\color{resumeAccent} GPA <%= tex(details.fetch("gpa")) %><%= " · #{tex(details["rank"].to_s.sub(/\ATop\s+/i, "前 "))}" if details["rank"] %>\par}
+<% end -%>
+<% end -%>
+    \end{minipage}%
+  };
+  \node[anchor=north west, inner sep=0pt] (graduate) at (0.56\linewidth,0) {%
+    \begin{minipage}[t]{0.44\linewidth}
+      \raggedright
+      \setlength{\parskip}{7pt}
+      {\large\bfseries <%= tex(education_details.fetch("graduate_title")) %>\par}
+      中国科学技术大学\par
+      <%= link(graduate.fetch("lab_zh", graduate.fetch("lab")), graduate.fetch("url")) %>\par
+      {\color{educationMuted}<%= tex(graduate.fetch("start_year")) %> 年入学\par}
+    \end{minipage}%
+  };
+  \draw[educationRule, line width=0.6pt]
+    ([xshift=-7mm]graduate.north west) -- ([xshift=-7mm]graduate.south west);
+\end{tikzpicture}\par
+
+<% unless gaokao.empty? -%>
+\educationSection{高考成绩}
+\noindent\begin{tikzpicture}
+  \node[rounded corners=5pt, fill=educationCard, inner xsep=12pt, inner ysep=15pt] {%
+    \begin{minipage}{\dimexpr\linewidth-24pt\relax}
+      \begin{minipage}[c]{0.24\linewidth}
+        \raggedright
+        {\small\color{educationMuted}<%= tex(gaokao.fetch("year")) %> 年<%= tex(gaokao.fetch("province")) %>高考\par}
+        \smallskip
+        {\rmfamily\bfseries\color{resumeAccent}\fontsize{32}{34}\selectfont <%= tex(gaokao.fetch("total")) %>}\enspace 分
+      \end{minipage}\hfill
+      \begin{minipage}[c]{0.72\linewidth}
+        \raggedright
+        \setlength{\parskip}{7pt}
+        {\large\bfseries\color{resumeAccent}全省第 <%= tex(gaokao.fetch("provincial_rank")) %> 名\par}
+        \smallskip
+<% gaokao.fetch("subjects").each_slice(3) do |subjects| -%>
+        <%= subjects.map { |subject, score| "#{tex(subject)} #{tex(score)}" }.join(' \quad ') %>\par
+<% end -%>
+      \end{minipage}
+    \end{minipage}%
+  };
+\end{tikzpicture}\par
+
+<% end -%>
+<% unless teaching_entries.empty? -%>
+\educationSection{教学经历}
+\noindent\begin{tikzpicture}
+<% teaching_entries.each_with_index do |entry, index| -%>
+<% position = index.zero? ? "20pt,0" : "[yshift=-21mm]teaching#{index - 1}.south west" -%>
+<% metadata = [entry["location"], cv_date(entry.fetch("date", ""), variant)].reject { |value| value.to_s.empty? } -%>
+  \node[anchor=north west, inner sep=0pt] (teaching<%= index %>) at (<%= position %>) {%
+    \begin{minipage}{\dimexpr\linewidth-20pt\relax}
+      \raggedright
+      \setlength{\parskip}{6pt}
+      {\large\bfseries <%= tex(entry.fetch("title")) %>\par}
+<% unless metadata.empty? -%>
+      {\color{educationMuted}<%= tex(metadata.join(" · ")) %>\par}
+<% end -%>
+      \smallskip
+<% entry.fetch("highlights").each do |highlight| -%>
+      <%= tex(highlight) %>\par
+<% end -%>
+    \end{minipage}%
+  };
+<% end -%>
+  \draw[educationRule, line width=0.8pt]
+    ([xshift=-14pt,yshift=-3pt]teaching0.north west)
+    -- ([xshift=-14pt]teaching<%= teaching_entries.length - 1 %>.south west);
+<% teaching_entries.each_index do |index| -%>
+  \fill[resumeAccent] ([xshift=-14pt,yshift=-8pt]teaching<%= index %>.north west) circle[radius=2.8pt];
+<% end -%>
+\end{tikzpicture}\par
+<% end -%>
+\end{document}

@@ -1,0 +1,36 @@
+% Adapted from the Medium Length Professional CV template by Trey Hunner.
+% Source: https://www.LaTeXTemplates.com
+
+\documentclass{resume}
+\usepackage{ctex}
+\linespread{1.16}
+\usepackage[colorlinks,allcolors=resumeAccent]{hyperref}
+
+<% name = profile.fetch("secondary_name", profile.fetch("primary_name")) -%>
+\name{<%= tex(name) %>}
+\address{中国科学技术大学 - 合肥}
+<% github = "github.com/#{profile.fetch("github")}" -%>
+\address{<%= tex(profile.fetch("email")) %> \\ <%= link(github, "https://#{github}") %>}
+
+\begin{document}
+\makeresumeheader
+
+\begin{resumeSection}{Education}
+<% profile.fetch("education").each do |entry| -%>
+<% details = entry.fetch("cv", {}) -%>
+  \textbf{<%= tex(details.fetch("degree") { text(entry.fetch("position")) }) %>}，
+  <%= tex(details.fetch("institution") { entry.fetch("name") }) %><%= "，#{tex(details["city"])}" if details["city"] %>
+  \hfill <%= tex(entry.fetch("date")) %>
+<% if details["gpa"] -%>
+  \\
+  GPA: <%= tex(details.fetch("gpa")) %><%= " (#{tex(details["rank"])})" if details["rank"] %>
+<% end -%>
+  \par
+<% end -%>
+  \textbf{硕士（拟入学）}，中国科学技术大学\enspace
+  <%= link(graduate.fetch("lab"), graduate.fetch("url")) %>
+  \hfill <%= tex(graduate.fetch("start_year")) %> 年入学
+\end{resumeSection}
+
+<%= content -%>
+\end{document}

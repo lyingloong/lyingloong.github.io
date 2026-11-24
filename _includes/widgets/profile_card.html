@@ -5,9 +5,10 @@
             {% for position in site.data.profile.positions %}
             <p>{{ position.name }}</p>
             {% endfor %}
+            <p>Incoming M.S. Student, {{ site.data.profile.graduate_study.lab | escape }}</p>
         </div>
         <div class="text-profile-bio"{% if site.data.profile.short_bio_text_justify %} style="text-align: justify;"{% endif %}>
-            {{ site.data.profile.short_bio }}
+            {% include widgets/profile_bio.html %}
         </div>
         <ul class="profile-links" aria-label="Contact and academic profiles">
             {% if site.data.profile.email %}

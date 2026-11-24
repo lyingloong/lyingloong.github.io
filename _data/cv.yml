@@ -1,0 +1,39 @@
+honors:
+  2022-honor-1:
+    title: 全国中学生物理竞赛（CPhO）山东省二等奖
+  2023-honor-1:
+    title: 优秀新生奖学金 金奖
+  2024-honor-1:
+    title: 国家励志奖学金
+    school_years: 2023–2024
+  2024-honor-2:
+    title: 优秀学生奖学金 铜奖
+    school_years: 2023–2025
+  2024-honor-3:
+    title: 唐仲英德育奖学金
+    school_years: 2023–2025
+  2024-honor-4:
+    title: 第二届余庆杯校园软件设计竞赛 优胜奖
+  2025-honor-3:
+    title: 校学生机器人大赛（RoboGame）二等奖
+  2025-honor-4:
+    title: iGEM 国际基因工程机器大赛团队金奖
+  2025-honor-5:
+    title: 安徽省揭榜挂帅挑战杯 一等奖 / 擂主
+  2026-honor-1:
+    title: 第三届余庆杯校园软件设计竞赛 一等奖
+  2026-honor-2:
+    title: 美国大学生数学建模竞赛 MCM Honorable Mention
+  2026-honor-3:
+    title: 安徽省 AI+ 信息素养大赛 二等奖
+
+additional_honors:
+  - title: 校学生机器人大赛（RoboGame）优胜奖
+    date: "2024"
+
+open_source_contributions:
+  - title: MCTrack
+    description: 参与开源三维多目标跟踪框架开发。
+    links:
+      Code: https://github.com/megvii-research/MCTrack
+      Pull request: https://github.com/megvii-research/MCTrack/pull/37

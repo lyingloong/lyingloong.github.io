@@ -43,6 +43,7 @@ plugins:
 
 # Exclude from processing.
 exclude:
+  - cv
   - docs
   - _templates
 
