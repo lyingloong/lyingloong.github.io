@@ -3,11 +3,11 @@
 \begin{resumeSection}[6]{<%= tex(heading) %>}
 <% roles.each do |entry| -%>
   \begin{resumeEntry}
-    {<%= tex(entry.fetch("title")) %>}
-    {<%= tex(cv_date(entry.fetch("date", ""), variant)) %>}
-    {<%= tex(entry.fetch("location", "")) %>}
+    {<%= inline_tex(entry.fetch("title")) %>}
+    {<%= inline_tex(entry.fetch("date")) %>}
+    {<%= inline_tex(entry.fetch("location")) %>}
 <% entry.fetch("highlights").each do |highlight| -%>
-    \item <%= tex(highlight) %>
+    \item <%= inline_tex(highlight) %>
 <% end -%>
   \end{resumeEntry}
 

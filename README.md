@@ -14,18 +14,11 @@ bundle exec jekyll serve
 The CVs share `cv/resume.cls`. The Professional layout uses `cv/main.tex.erb`
 and the Education layout uses `cv/education.tex.erb`.
 
-| Text to change | Source |
-| --- | --- |
-| Contact details, education, research interests, internships, and New Oriental | `_data/profile.yml` |
-| Education CV photo, additional email addresses, graduate title, Gaokao results, teaching assistant experience, and tutoring | `cv/education.yml` |
-| Professional CV skills and projects listed only in the CV | `cv/professional.tex.erb` |
-| Publications, homepage projects, and honors | `_publications/`, `_projects/`, and `_honors/` |
-| Awards listed only in the CV, award translations, and open-source contributions | `_data/cv.yml` |
-
-Use the `cv` block on a shared education or experience entry for Chinese labels
-and contribution details. Set `section: teaching` within that block to route a
-role to the Education CV. Set `show: false` within that block to omit the role
-from the CVs.
+Edit [`cv/education.md`](cv/education.md) or [`cv/professional.md`](cv/professional.md)
+to update the corresponding CV. Each file contains the complete copy for its own
+PDF. Keep the order of the `##` sections so each keeps its layout. Use `###`
+for roles and projects, `date · location or subtitle` for their metadata, and
+`-` bullets for details.
 
 Building requires Ruby 3, XeLaTeX, latexmk, TikZ, and the TeX Live Chinese
 language and recommended font packages. On Debian or Ubuntu, install them with

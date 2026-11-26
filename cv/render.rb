@@ -1,130 +1,149 @@
-require "cgi"
-require "date"
 require "erb"
 require "pathname"
-require "yaml"
 
-ROOT = Pathname.new(__dir__).parent
+CV_DIR = Pathname.new(__dir__)
 TEX_ESCAPES = {
-  "\\" => '\\textbackslash{}',
-  "{" => '\\{',
-  "}" => '\\}',
-  "$" => '\\$',
-  "&" => '\\&',
-  "#" => '\\#',
-  "_" => '\\_',
-  "%" => '\\%',
-  "~" => '\\textasciitilde{}',
-  "^" => '\\textasciicircum{}'
+  "\\" => '\textbackslash{}',
+  "{" => '\{',
+  "}" => '\}',
+  "$" => '\$',
+  "&" => '\&',
+  "#" => '\#',
+  "_" => '\_',
+  "%" => '\%',
+  "~" => '\textasciitilde{}',
+  "^" => '\textasciicircum{}'
 }.freeze
 
-def read_yaml(path, source = path.read(encoding: "UTF-8"))
-  YAML.safe_load(source, permitted_classes: [Date, Time], aliases: true, filename: path.to_s)
-end
-
-def collection(name)
-  ROOT.glob("_#{name}/**/*.{md,markdown}").filter_map do |path|
-    front_matter = path.read(encoding: "UTF-8")[/\A---\r?\n(.*?)^---[ \t]*\r?$/m, 1]
-    next unless front_matter
-
-    item = read_yaml(path, front_matter)
-    next if item.fetch("published", true) == false
-
-    item.merge("id" => path.basename(path.extname).to_s)
-  end.sort_by { |item| [item.fetch("date").to_s, item.fetch("id")] }.reverse
-end
-
 def tex(value)
-  value.to_s.gsub(/[\\{}$&\#_%~^]/, TEX_ESCAPES)
-end
-
-def text(html)
-  CGI.unescapeHTML(html.to_s.gsub(/<br\s*\/?>/i, " ").gsub(/<[^>]+>/, ""))
+  value.to_s.gsub(/[\\{}$&#_%~^]/, TEX_ESCAPES)
 end
 
 def link(label, url)
-  address = url.to_s.gsub(/[\\{}%#]/) { |character| "\\#{character}" }
+  address = url.gsub(/[\\{}%#]/) { |character| "\\#{character}" }
   "\\href{#{address}}{#{tex(label)}}"
 end
 
-def links(items)
-  items.map do |label, url|
-    link(label, url.is_a?(Hash) ? url.fetch("url") : url)
-  end.join(' \\enspace ')
+def inline_tex(value)
+  tokens = value.to_s.split(/(\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]\n]+\]\([^\n)]+\))/)
+  tokens.map do |token|
+    case token
+    when /\A\*\*([^*]+)\*\*\z/
+      "\\textbf{#{tex(Regexp.last_match(1))}}"
+    when /\A\*([^*]+)\*\z/
+      "\\textit{#{tex(Regexp.last_match(1))}}"
+    when /\A\[([^\]]+)\]\(([^)]+)\)\z/
+      link(Regexp.last_match(1), Regexp.last_match(2))
+    else
+      tex(token)
+    end
+  end.join
 end
 
-def year(date)
-  date.respond_to?(:year) ? date.year : Date.parse(date.to_s).year
-end
+def inline_link_group(line, first_separator: " ")
+  text, *links = line.split(/ +(?=\[[^\]]+\]\([^)]+\))/)
+  formatted_text = inline_tex(text)
+  return formatted_text if links.empty?
 
-def cv_date(value, variant)
-  return value unless variant == "education"
-
-  value.to_s
-       .sub(/\bPresent\z/, "今")
-       .gsub(/\b([A-Z][a-z]+)\.?\s+(\d{4})\b/) do |part|
-         month = Date::ABBR_MONTHNAMES.index(Regexp.last_match(1)[0, 3])
-         month ? "#{Regexp.last_match(2)} 年 #{month} 月" : part
-       end
-       .gsub(/\s+[–—-]\s+/, "至")
-end
-
-def experience_entry(entry)
-  details = entry.fetch("cv", {})
-  {
-    "title" => details.fetch("title") { entry.fetch("name") },
-    "date" => entry.fetch("date"),
-    "location" => details.fetch("location", ""),
-    "highlights" => details.fetch("highlights") { [text(entry.fetch("position"))] }
-  }
+  formatted_text + first_separator + links.map { |entry| inline_tex(entry) }.join(' \enspace ')
 end
 
 def render_template(name, context)
-  template = ROOT.join("cv/#{name}.tex.erb")
+  template = CV_DIR.join("#{name}.tex.erb")
   renderer = ERB.new(template.read(encoding: "UTF-8"), trim_mode: "-")
   renderer.filename = template.to_s
   renderer.result(context)
+end
+
+def markdown_sections(source, marker)
+  intro, *parts = source.split(/^#{marker}[ \t]+(.+?)\n/, -1)
+  sections = parts.each_slice(2).map { |title, body| [title.strip, body.strip] }
+  [intro.to_s.strip, sections]
+end
+
+def markdown_lines(source)
+  source.lines.map(&:strip).reject(&:empty?)
+end
+
+def markdown_paragraphs(source)
+  source.split(/\n[ \t]*\n/).map { |paragraph| markdown_lines(paragraph) }
+end
+
+def markdown_bullets(source)
+  intro, *items = source.split(/^-[ \t]+/, -1)
+  [intro.to_s.strip, items.map { |item| markdown_lines(item).join(" ") }]
+end
+
+def markdown_image(line)
+  match = line.match(/\A!\[[^\]]*\]\(([^)]+)\)\z/)
+  CV_DIR.join(match[1]).cleanpath if match
+end
+
+def markdown_roles(sections)
+  sections.map do |title, body|
+    metadata, highlights = markdown_bullets(body)
+    date, location = metadata.split(" · ", 2)
+    { "title" => title, "date" => date.to_s, "location" => location.to_s, "highlights" => highlights }
+  end
 end
 
 variant = ARGV.fetch(0, "professional")
 variant = "professional" if variant == "computer"
 abort "Usage: ruby render.rb [professional|education]" unless ARGV.size <= 1 && %w[professional education].include?(variant)
 
-profile = read_yaml(ROOT.join("_data/profile.yml"))
-cv = read_yaml(ROOT.join("_data/cv.yml"))
-graduate = profile.fetch("graduate_study")
-visible_experience = profile.fetch("experience").reverse.reject { |entry| entry.dig("cv", "show") == false }
-experience, teaching = visible_experience.partition do |entry|
-  entry.dig("cv", "section") != "teaching"
-end
+path = CV_DIR.join("#{variant}.md")
+source = path.read(encoding: "UTF-8").gsub("\r\n", "\n")
+header, sections = markdown_sections(source, "##")
+heading, affiliation, *header_lines = markdown_lines(header)
+abort "Expected a name heading and an affiliation in #{path}" unless heading&.start_with?("# ") && affiliation
+
+name = heading.delete_prefix("# ")
 
 if variant == "professional"
-  research = profile.fetch("research")
-  experience_sections = { "Internship/Trainings" => experience.map { |entry| experience_entry(entry) } }
-  publications = collection("publications")
-  projects = collection("projects").select { |item| item["show"] && item["selected"] }
+  abort "Expected seven sections in #{path}" unless sections.length == 7
 
-  honor_labels = cv.fetch("honors")
-  honors = collection("honors").group_by { |item| item.fetch("title") }.map do |title, entries|
-    details = entries.filter_map { |entry| honor_labels[entry.fetch("id")] }.first || {}
-    years = entries.map { |entry| year(entry.fetch("date")) }.uniq.sort.join("、")
-    school_years = details["school_years"]
-    {
-      "title" => details.fetch("title", title),
-      "date" => school_years ? "#{years} 获奖，#{school_years} 学年" : years
-    }
+  education_section, skills_section, publication_section, internship_section, project_section, recent_section, award_section = sections
+  contacts = header_lines.join(" · ").split(" ⋄ ")
+  education_entries = markdown_paragraphs(education_section.last)
+  _, skills_sections = markdown_sections(skills_section.last, "###")
+  skill_rows = skills_sections.flat_map do |title, body|
+    description, bullets = markdown_bullets(body)
+    rows = [description, *bullets].reject(&:empty?)
+    rows.each_with_index.map { |row, index| [index.zero? ? title : "", row] }
   end
-  honors.concat(cv.fetch("additional_honors"))
+  publications = markdown_paragraphs(publication_section.last)
+  experience_sections = [internship_section, project_section].map do |title, body|
+    [title, markdown_roles(markdown_sections(body, "###").last)]
+  end
+  contributions = markdown_sections(recent_section.last, "###").last.map do |title, body|
+    description, links = markdown_bullets(body)
+    { "title" => title, "description" => description, "links" => links }
+  end
+  _, awards = markdown_bullets(award_section.last)
 
   experience_tex = render_template("experience", binding)
-  content = render_template(variant, binding)
+  content = render_template("professional", binding)
   print render_template("main", binding)
 else
-  education_details = read_yaml(ROOT.join("cv/education.yml"))
-  gaokao = education_details.fetch("gaokao", {})
-  education_emails = [profile.fetch("email"), *education_details.fetch("additional_emails", [])]
-  education_photo = ROOT.join(education_details.fetch("photo"))
-  teaching_entries = (teaching + education_details.fetch("teaching", [])).map { |entry| experience_entry(entry) }
-  teaching_entries.concat(education_details.fetch("tutoring", []))
+  abort "Expected three sections in #{path}" unless sections.length == 3
+
+  education_section, gaokao_section, teaching_section = sections
+  education_photo = header_lines.filter_map { |line| markdown_image(line) }.first
+  education_contacts = header_lines.reject { |line| markdown_image(line) }
+  columns = markdown_sections(education_section.last, "###").last.map do |title, body|
+    lines = markdown_lines(body)
+    logo = lines.filter_map { |line| markdown_image(line) }.first
+    { "title" => title, "logo" => logo, "lines" => lines.reject { |line| markdown_image(line) } }
+  end
+  abort "Expected two education entries in #{path}" unless columns.length == 2
+
+  undergraduate, graduate = columns
+  gaokao_summary, gaokao_subjects = markdown_bullets(gaokao_section.last)
+  gaokao_caption, total, gaokao_rank = markdown_lines(gaokao_summary)
+  gaokao_total, gaokao_max = total.to_s.delete_prefix("**").delete_suffix("**").split("/", 2)
+  abort "Expected a Gaokao total in score/max form in #{path}" unless gaokao_max
+
+  teaching_summary, teaching_sections = markdown_sections(teaching_section.last, "###")
+  teaching_entries = markdown_roles(teaching_sections)
   print render_template("education", binding)
 end

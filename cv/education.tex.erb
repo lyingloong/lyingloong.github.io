@@ -6,7 +6,7 @@
 
 \newlength{\educationMargin}
 \setlength{\educationMargin}{14mm}
-\geometry{a4paper,left=\educationMargin,right=\educationMargin,top=0mm,bottom=16mm}
+\geometry{a4paper,left=\educationMargin,right=\educationMargin,top=16mm,bottom=16mm}
 \definecolor{resumeAccent}{HTML}{234359}
 \definecolor{educationInk}{HTML}{26343A}
 \definecolor{educationMuted}{HTML}{556871}
@@ -14,6 +14,7 @@
 \definecolor{educationCard}{HTML}{EBF1F4}
 \definecolor{educationRule}{HTML}{C8D6DF}
 \usepackage[colorlinks,allcolors=resumeAccent]{hyperref}
+\raggedbottom
 
 \newcommand{\educationSection}[1]{%
   \par\addvspace{9mm}%
@@ -29,45 +30,60 @@
 \begingroup
 \setlength{\fboxsep}{0pt}
 \hypersetup{urlcolor=educationHeaderText}
-\noindent\makebox[0pt][l]{\hspace*{-\educationMargin}%
+% Extend the first-page banner into the top margin.
+\vspace*{\dimexpr-16mm-\topskip\relax}
+\nointerlineskip
+{\setlength{\parskip}{0pt}\noindent}%
+\makebox[0pt][l]{\hspace*{-\educationMargin}%
   \colorbox{resumeAccent}{%
     \begin{minipage}[c][61mm][c]{\paperwidth}
       \noindent\hspace*{\educationMargin}%
       \begin{minipage}[c]{0.64\paperwidth}
         \raggedright\color{educationHeaderText}
-        {\kaishu\color{white}\fontsize{34}{39}\selectfont
-          <%= tex(profile.fetch("secondary_name", profile.fetch("primary_name"))) %>\par}
+        {\kaishu\color{white}\fontsize{38}{43}\selectfont
+          <%= tex(name) %>\par}
         \medskip
-        {\large 中国科学技术大学 · 合肥\par}
+        {\large <%= inline_tex(affiliation) %>\par}
         \medskip
-        {\small 邮箱\par}
-<% education_emails.each do |email| -%>
-        <%= link(email, "mailto:#{email}") %>\par
+<% education_contacts.each_with_index do |entry, index| -%>
+<% if index.zero? -%>
+        {\small <%= inline_tex(entry) %>\par}
+<% else -%>
+        <%= inline_tex(entry) %>\par
+<% end -%>
 <% end -%>
       \end{minipage}\hfill
+<% if education_photo -%>
       \begin{tikzpicture}[baseline=(portrait.center)]
         \node[rounded corners=4pt, fill=white, draw=educationRule, inner sep=2.5pt] (portrait)
           {\includegraphics[width=34mm]{\detokenize{<%= education_photo %>}}};
       \end{tikzpicture}%
+<% end -%>
       \hspace*{\educationMargin}%
     \end{minipage}%
   }%
 }\par
 \endgroup
 
-\educationSection{教育背景}
+\educationSection{<%= inline_tex(education_section.first) %>}
 \noindent\begin{tikzpicture}
   \node[anchor=north west, inner sep=0pt] at (0,0) {%
     \begin{minipage}[t]{0.49\linewidth}
       \raggedright
       \setlength{\parskip}{7pt}
-<% profile.fetch("education").each do |entry| -%>
-<% details = entry.fetch("cv", {}) -%>
-      {\large\bfseries <%= tex(details.fetch("institution") { entry.fetch("name") }) %>\par}
-      <%= tex(details.fetch("degree") { text(entry.fetch("position")) }) %>\par
-      {\color{educationMuted}<%= tex(cv_date(entry.fetch("date"), variant)) %>\par}
-<% if details["gpa"] -%>
-      {\bfseries\color{resumeAccent} GPA <%= tex(details.fetch("gpa")) %><%= " · #{tex(details["rank"].to_s.sub(/\ATop\s+/i, "前 "))}" if details["rank"] %>\par}
+      {\large\bfseries <%= inline_tex(undergraduate.fetch("title")) %>%
+<% if undergraduate["logo"] -%>
+        \hspace{3mm}\raisebox{-0.3\height}[0pt][0pt]{%
+          \includegraphics[width=9mm]{\detokenize{<%= undergraduate.fetch("logo") %>}}}%
+<% end -%>
+        \par}
+<% undergraduate.fetch("lines").each do |line| -%>
+<% if line.start_with?("GPA ") -%>
+      {\bfseries\color{resumeAccent}<%= inline_tex(line) %>\par}
+<% elsif line.match?(/\A\d{4} 年/) -%>
+      {\color{educationMuted}<%= inline_tex(line) %>\par}
+<% else -%>
+      <%= inline_tex(line) %>\par
 <% end -%>
 <% end -%>
     \end{minipage}%
@@ -76,68 +92,72 @@
     \begin{minipage}[t]{0.44\linewidth}
       \raggedright
       \setlength{\parskip}{7pt}
-      {\large\bfseries <%= tex(education_details.fetch("graduate_title")) %>\par}
-      中国科学技术大学\par
-      <%= link(graduate.fetch("lab_zh", graduate.fetch("lab")), graduate.fetch("url")) %>\par
-      {\color{educationMuted}<%= tex(graduate.fetch("start_year")) %> 年入学\par}
+      {\large\bfseries <%= inline_tex(graduate.fetch("title")) %>\par}
+<% graduate.fetch("lines").each do |line| -%>
+<% if line.match?(/\A\d{4} 年/) -%>
+      {\color{educationMuted}<%= inline_tex(line) %>\par}
+<% else -%>
+      <%= inline_tex(line) %>\par
+<% end -%>
+<% end -%>
     \end{minipage}%
   };
   \draw[educationRule, line width=0.6pt]
     ([xshift=-7mm]graduate.north west) -- ([xshift=-7mm]graduate.south west);
 \end{tikzpicture}\par
 
-<% unless gaokao.empty? -%>
-\educationSection{高考成绩}
+\educationSection{<%= inline_tex(gaokao_section.first) %>}
 \noindent\begin{tikzpicture}
   \node[rounded corners=5pt, fill=educationCard, inner xsep=12pt, inner ysep=15pt] {%
     \begin{minipage}{\dimexpr\linewidth-24pt\relax}
       \begin{minipage}[c]{0.24\linewidth}
         \raggedright
-        {\small\color{educationMuted}<%= tex(gaokao.fetch("year")) %> 年<%= tex(gaokao.fetch("province")) %>高考\par}
+        {\small\color{educationMuted}<%= inline_tex(gaokao_caption) %>\par}
         \smallskip
-        {\rmfamily\bfseries\color{resumeAccent}\fontsize{32}{34}\selectfont <%= tex(gaokao.fetch("total")) %>}\enspace 分
+        {\rmfamily\bfseries\color{resumeAccent}%
+          {\fontsize{32}{34}\selectfont <%= tex(gaokao_total) %>}%
+          {\large /<%= tex(gaokao_max) %>}\par}
       \end{minipage}\hfill
       \begin{minipage}[c]{0.72\linewidth}
         \raggedright
         \setlength{\parskip}{7pt}
-        {\large\bfseries\color{resumeAccent}全省第 <%= tex(gaokao.fetch("provincial_rank")) %> 名\par}
+        {\large\bfseries\color{resumeAccent}<%= inline_tex(gaokao_rank) %>\par}
         \smallskip
-<% gaokao.fetch("subjects").each_slice(3) do |subjects| -%>
-        <%= subjects.map { |subject, score| "#{tex(subject)} #{tex(score)}" }.join(' \quad ') %>\par
+        \renewcommand{\arraystretch}{1.5}%
+        \begin{tabular}{@{}l@{\hspace{1em}}l@{\hspace{1em}}l@{}}
+<% gaokao_subjects.each_slice(3) do |subjects| -%>
+          <%= subjects.map { |subject| inline_tex(subject) }.join(' & ') %> \\
 <% end -%>
+        \end{tabular}\par
       \end{minipage}
     \end{minipage}%
   };
 \end{tikzpicture}\par
 
-<% end -%>
 <% unless teaching_entries.empty? -%>
-\educationSection{教学经历}
-\noindent\begin{tikzpicture}
-<% teaching_entries.each_with_index do |entry, index| -%>
-<% position = index.zero? ? "20pt,0" : "[yshift=-21mm]teaching#{index - 1}.south west" -%>
-<% metadata = [entry["location"], cv_date(entry.fetch("date", ""), variant)].reject { |value| value.to_s.empty? } -%>
-  \node[anchor=north west, inner sep=0pt] (teaching<%= index %>) at (<%= position %>) {%
-    \begin{minipage}{\dimexpr\linewidth-20pt\relax}
-      \raggedright
-      \setlength{\parskip}{6pt}
-      {\large\bfseries <%= tex(entry.fetch("title")) %>\par}
+\needspace{6\baselineskip}
+\educationSection{<%= inline_tex(teaching_section.first) %>}
+<% unless teaching_summary.empty? -%>
+<%= inline_tex(teaching_summary) %>\par
+<% end -%>
+\begingroup
+\setlength{\leftskip}{20pt}
+\setlength{\parskip}{4pt}
+<% teaching_entries.each do |entry| -%>
+<% metadata = [entry.fetch("date"), entry.fetch("location")].reject(&:empty?) -%>
+  \addvspace{4mm}
+  \needspace{4\baselineskip}
+  \noindent\llap{\textcolor{resumeAccent}{\large\textbullet}\hspace{9pt}}%
+  {\large\bfseries <%= inline_tex(entry.fetch("title")) %>\par}
+  \nobreak
 <% unless metadata.empty? -%>
-      {\color{educationMuted}<%= tex(metadata.join(" · ")) %>\par}
+  {\color{educationMuted}<%= inline_tex(metadata.join(" · ")) %>\par}
+  \nobreak
 <% end -%>
-      \smallskip
 <% entry.fetch("highlights").each do |highlight| -%>
-      <%= tex(highlight) %>\par
+  <%= inline_tex(highlight) %>\par
 <% end -%>
-    \end{minipage}%
-  };
 <% end -%>
-  \draw[educationRule, line width=0.8pt]
-    ([xshift=-14pt,yshift=-3pt]teaching0.north west)
-    -- ([xshift=-14pt]teaching<%= teaching_entries.length - 1 %>.south west);
-<% teaching_entries.each_index do |index| -%>
-  \fill[resumeAccent] ([xshift=-14pt,yshift=-8pt]teaching<%= index %>.north west) circle[radius=2.8pt];
-<% end -%>
-\end{tikzpicture}\par
+\endgroup
 <% end -%>
 \end{document}

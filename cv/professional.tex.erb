@@ -1,21 +1,16 @@
-\begin{resumeSection}{Skills and Interests}
+\begin{resumeSection}{<%= tex(skills_section.first) %>}
   \begin{tabular}{@{}>{\bfseries}l@{\hspace{6ex}}l}
-    Research  & <%= tex(research.values_at("focus_zh", "specialty_zh", "evaluation_zh").join("、")) %>\\
-    Interests & LLM, AI-Agent, Edge AI\\
-    Skills    & 熟悉神经网络与大模型训推（基于PyTorch）、部署、量化\\
-              & 掌握模型测评，LLM-as-judge方法\\
-              & 熟悉Agent（OpenManus等）记忆领域
+<% skill_rows.each_with_index do |(label, text), index| -%>
+    <%= inline_tex(label) %> & <%= inline_tex(text) %><%= '\\' * 2 if index < skill_rows.length - 1 %>
+<% end -%>
   \end{tabular}
 \end{resumeSection}
 
 <% unless publications.empty? -%>
-\begin{resumeSection}{Publications}
-<% publications.each do |paper| -%>
-<% author_names = paper.fetch("authors").map { |name| name == profile.fetch("primary_name") ? "\\textbf{#{tex(name)}}" : tex(name) } -%>
-  <%= author_names.join(", ") %>. \\
-  \textit{<%= tex(paper.fetch("title")) %>}.
-  <%= tex(paper.fetch("pub")) %>, <%= tex(paper.fetch("pub_date") { year(paper.fetch("date")) }) %>.
-  <%= links(paper.fetch("links", {})) %>
+\begin{resumeSection}{<%= tex(publication_section.first) %>}
+<% publications.each do |authors, *citation| -%>
+  <%= inline_tex(authors) %> \\
+  <%= inline_link_group(citation.join(" ")) %>
   \par
 <% end -%>
 \end{resumeSection}
@@ -23,80 +18,20 @@
 
 <%= experience_tex -%>
 
-\begin{resumeSection}[6]{Selected Projects}
-
-  \begin{resumeEntry}
-    {情绪大模型与记忆模块测评框架}
-    {March 2026 - April 2026}
-    {实习项目}
-    \item 基于G-eval实现情绪大模型的完整测评框架，包括情绪识别能力、模型基础性能等
-    \item 基于LongMemEval实现Agent记忆模块测评框架
-    \item 实习单位：合肥灵心科技有限公司
-
-  \end{resumeEntry}
-
-  \begin{resumeEntry}
-    {基于Rocm的大模型端侧推理优化}
-    {September 2025 - January 2026}
-    {安徽省揭榜挂帅挑战杯 - 一等奖/擂主}
-    \item 针对 Qwen3-4B 大模型端侧推理优化，主导INT4/INT8 量化方案
-    \item 基于 ROCm 栈完成边缘设备适配的端侧 LLM 量化推理Benchmark
-    \item 发榜单位： 合肥速显微电子科技有限公司
-  \end{resumeEntry}
-
-  \begin{resumeEntry}
-    {多变量时间序列预测}
-    {Fall 2024 - Fall 2025}
-    {大学生研究计划}
-    \item 针对电力 / 交通 / 气象场景，提出DoubleCNN 通道感知模型，建模多变量时序通道关联
-    \item 完成数据预处理、模型训练、 Ablation 实验与结果验证全流程
-    \item 指导教师：宋骐（USTC - LINKE实验室）
-  \end{resumeEntry}
-
-  \begin{resumeEntry}
-    {RoboGame 2025 机器人视觉系统}
-    {June 2025 - October 2025}
-    {校学生机器人大赛 - 二等奖}
-    \item 团队机器人视觉负责成员，基于 OrangePi 搭建机器人实时视觉定位与姿态识别系统
-    \item 完成 TTL 串口上下位机通信、视觉算法部署与自动化控制联调
-  \end{resumeEntry}
-
-  \begin{resumeEntry}
-    {iGEM国际基因工程机器大赛}
-    {January 2025 - October 2025}
-    {运维组成员 - 金奖}
-    \item 开发 Markdown 转 React 组件渲染工具，支撑团队 Wiki 成果展示网页
-    \item 负责服务器部署、运维以及一部分网页前端开发工作
-  \end{resumeEntry}
-
-\end{resumeSection}
-
-\begin{resumeSection}[5]{Recent Projects and Open Source Contributions}
-<% projects.each do |project| -%>
-<% project_links = { "Project" => project["website_url"], "Code" => project["source_url"], "Steam" => project["steam_url"] }.compact -%>
+\begin{resumeSection}[5]{<%= tex(recent_section.first) %>}
+<% contributions.each do |contribution| -%>
   \needspace{3\baselineskip}
-  \textbf{<%= tex(project.fetch("title")) %>}\enspace
-  <%= tex(text(project.fetch("description"))) %>
-<% unless project_links.empty? -%>
-  \enspace <%= links(project_links) %>
+  \textbf{<%= inline_tex(contribution.fetch("title")) %>}\enspace
+  <%= inline_tex(contribution.fetch("description")) %>
+<% unless contribution.fetch("links").empty? -%>
+  \enspace <%= contribution.fetch("links").map { |entry| inline_tex(entry) }.join(' \enspace ') %>
 <% end -%>
-<% if project["display_date"] -%>
-  \enspace (<%= tex(project["display_date"]) %>)
-<% end -%>
-  \par
-
-<% end -%>
-<% cv.fetch("open_source_contributions").each do |contribution| -%>
-  \needspace{3\baselineskip}
-  \textbf{<%= tex(contribution.fetch("title")) %>}\enspace
-  <%= tex(contribution.fetch("description")) %>\enspace
-  <%= links(contribution.fetch("links")) %>
   \par
 <% end -%>
 \end{resumeSection}
 
-\begin{resumeSection}{Awards}
-  <%= honors.map { |award| tex(award.fetch("title")) + "（#{tex(award.fetch("date"))}）" }.join("\\\\\n  ") %>
+\begin{resumeSection}{<%= tex(award_section.first) %>}
+  <%= awards.map { |award| inline_tex(award) }.join("\\\\\n  ") %>
 \end{resumeSection}
 
 % Optional entries kept for future CV versions.
